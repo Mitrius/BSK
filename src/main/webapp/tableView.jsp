@@ -5,6 +5,7 @@
   Time: 13:38
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -17,24 +18,33 @@
     <p>Zalogowano jako użytkownik ${user.getUserLogin()}</p>
 </div>
 <div id="magicButton">
-    <form onsubmit="renderTables()">
+    <form action="/getPossibleTables">
         <input type="submit" value="wyświetl tabele">
     </form>
 </div>
 <div id="tables">
+    <c:choose>
+        <c:when test="${not empty tables}">
+            <c:forEach var="element" items="${tables}">
+                <table>
+                    <c:forEach var="row" items="${element}">
+                        <tr>
+                            <c:forEach var="column" items="${row}">
+                                <td>
+                                    <c:out value="${column}">
+                                    </c:out>
+                                </td>
+                            </c:forEach>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </c:forEach>
+        </c:when>
+        <c:otherwise>
+            <c:out value="aaa nie działam">
+            </c:out>
+        </c:otherwise>
+    </c:choose>
 </div>
 </body>
-<script>
-    function renderTables() {
-        var tables, status;
-        $.getJSON("/getPossibleTables", function (tables) {
-            var tablesParsed = JSON.parse(tables);
-            var working = document.createElement("p");
-            working.text = tables;
-            var divTab = document.getElementById("tables");
-            divTab.appendChild(working);
-        })
-    }
-
-</script>
 </html>
