@@ -1,11 +1,11 @@
 package com.bsk.controllers;
 
-import com.bsk.entities.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import sun.security.util.Password;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,18 +21,21 @@ public class LoginController {
     }
 
     //Kontrola logowania
+    //TODO hasło
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
-    public ModelAndView userLogin(@ModelAttribute("user") User userProc, HttpSession session) {
+    public ModelAndView userLogin(@RequestParam("userLogin") String userLogin,
+                                  @RequestParam("userPassword") String userPassword,
+                                  HttpSession session) {
         ModelAndView modelAndView = new ModelAndView("tableView");
-        if (validateUser(userProc)) {
-            modelAndView.getModelMap().addAttribute("user", userProc);
-            session.setAttribute("username", userProc.getUserLogin());
+        if (validateUser(userLogin, userPassword)) {
+            modelAndView.getModelMap().addAttribute("user", userLogin);
+            session.setAttribute("username", userLogin);
         }
         return modelAndView;
     }
 
     //Metoda łączy się z bazą danych i sprawdza obecność w niej usera o podanych danych
-    private Boolean validateUser(User userProc) {
+    private Boolean validateUser(String username, String password) {
         //TODO kontakt z bazą danych i walidacja użytkownika
         return true;
     }

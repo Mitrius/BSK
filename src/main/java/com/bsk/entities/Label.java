@@ -13,9 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 public class Label {
-
     private int labelId;
     private String userLogin;
     private List<String> tables; //Do jakich tablic ma dostep uzytkownik
-
 }

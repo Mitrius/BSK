@@ -11,30 +11,31 @@
 <html>
 <head>
     <title>Title</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/tableViewStyle.css"/>
 </head>
 <body>
 <div id="userInfo">
-    <p>Zalogowano jako użytkownik ${user.getUserLogin()}</p>
+    <p>Zalogowano jako użytkownik ${user}</p>
 </div>
 <div id="magicButton">
-    <form action="/getPossibleTables">
+    <form action="${pageContext.request.contextPath}/getPossibleTables">
         <input type="submit" value="wyświetl tabele">
     </form>
 </div>
 <div id="tables">
+
     <c:choose>
         <c:when test="${not empty tables}">
-            <c:forEach var="element" items="${tables}">
-                <table>
-                    <c:forEach var="row" items="${element}">
+            <c:forEach var="table" items="${tables}">
+                <table class="dynamicTable" style="border: darkblue">
+                    <c:forEach var="row" items="${table}">
                         <tr>
-                            <c:forEach var="column" items="${row}">
+                            <c:forTokens var="column" items="${row}" delims=",">
                                 <td>
                                     <c:out value="${column}">
                                     </c:out>
                                 </td>
-                            </c:forEach>
+                            </c:forTokens>
                         </tr>
                     </c:forEach>
                 </table>
