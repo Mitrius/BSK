@@ -5,7 +5,7 @@
 </head>
 <body>
 <div id="logDiv">
-    <form id="loginForm" method="post" action="${pageContext.request.contextPath}/login">
+    <form id="loginForm" method="post" action="${pageContext.request.contextPath}/userLogin">
         <label>
             Login użytkownika:
             <input type="text" name="userLogin">

@@ -16,7 +16,9 @@ import java.io.Serializable;
 @Component
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class User implements Serializable {
+
     private String userLogin;
     private String userPassword;
     private Label label;
+
 }
