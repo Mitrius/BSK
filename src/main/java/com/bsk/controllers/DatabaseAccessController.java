@@ -1,7 +1,8 @@
 package com.bsk.controllers;
 
-import com.bsk.entities.Customer;
 import com.bsk.entities.Video;
+import com.bsk.services.VideoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,26 +18,16 @@ import java.util.stream.Collectors;
 @Controller
 public class DatabaseAccessController {
 
+    @Autowired
+    private VideoService videoService;
+
     @RequestMapping(value = "/getPossibleTables")
     //Zwróć dostępne tablice dla użytkownika
     public ModelAndView getPossibleTables(HttpSession session) {
-        List<Customer> custList = new ArrayList<>();
-        custList.add(new Customer(1, "Stefan", "S"));
-        custList.add(new Customer(2, "Anita", "Z"));
-
-        List<Video> videoList = new ArrayList<>();
-        videoList.add(new Video(1, "Forrest Gump", 12.50, "dostępne"));
-        videoList.add(new Video(1, "kruk", 12.50, "dostępne"));
-
-        List<List<String>> tables = new ArrayList<>();
-
-        tables.add(custList.stream().map(Object::toString).collect(Collectors.toList()));
-        tables.add(videoList.stream().map(Object::toString).collect(Collectors.toList()));
-
-
         ModelAndView modelAndView = new ModelAndView("tableView");
+        List<List<String>> tables = new ArrayList<>();
+        List<String> videoStringList = videoService.getAllVideos().stream().map(Video::toString).collect(Collectors.toList());
         modelAndView.getModelMap().addAttribute("tables", tables);
-
         return modelAndView;
     }
 

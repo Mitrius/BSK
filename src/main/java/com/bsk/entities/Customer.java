@@ -1,24 +1,29 @@
 package com.bsk.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Created by Mitrius on 14.03.17.
  */
 @Entity
-@Getter
-@AllArgsConstructor
-public class Customer {
+@Data
+@Table(name = "Customers")
+public class Customer implements Serializable {
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private Integer id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "surname")
     private String surname;
+    @Column(name = "objectClass")
+    private Integer objectClass;
 
-    @Override
-    public String toString() {
-        return id.toString() + "," + name + "," + surname;
-    }
+    @OneToMany(mappedBy = "customer")
+    private Set<ShopTransaction> transactions;
 }

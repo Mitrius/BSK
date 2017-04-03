@@ -1,0 +1,61 @@
+body {
+    background-color: whitesmoke;
+    width: 100%;
+    margin: auto;
+}
+
+#userInfo {
+    margin: 0 auto;
+    text-align: center;
+}
+
+#magicButton {
+    margin: 0 auto;
+    text-align: right;
+}
+
+#submitButt {
+    text-align: right;
+}
+
+#logDiv {
+    margin: auto;
+    padding: 50px;
+}
+
+#tables {
+    font-family: Times New Roman, serif;
+    background-color: wheat;
+    box-shadow: 0 5px 5px -1px rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    width: 80%;
+    margin: 10px auto;
+    border: 1px solid black;
+    display: table;
+}
+
+table {
+    border: 1px solid black;
+    box-shadow: 0 5px 5px -1px rgba(0, 0, 0, 0.5);
+    background-color: white;
+    border-radius: 4px;
+    margin: 20px auto;
+    padding: 10px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+th, td {
+    border: 1px solid black;
+
+}
+
+#logDiv {
+    border: 1px solid black;
+    box-shadow: 0 5px 5px -1px rgba(0, 0, 0, 0.5);
+    background-color: white;
+    border-radius: 4px;
+    margin: 20px;
+    padding: 10px;
+    text-align: center;
+}
