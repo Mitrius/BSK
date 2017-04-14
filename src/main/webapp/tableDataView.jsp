@@ -13,6 +13,7 @@
     <form action="${pageContext.request.contextPath}/logout" id="submitButt">
         <input type="submit" value="wyloguj">
     </form>
+    <a href="/register">Rejestracja</a>
 </div>
 <div id="magicButton">
     <form action="${pageContext.request.contextPath}/getPossibleTables">

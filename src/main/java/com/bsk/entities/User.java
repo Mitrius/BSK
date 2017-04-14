@@ -3,10 +3,7 @@ package com.bsk.entities;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -14,6 +11,7 @@ import java.io.Serializable;
  */
 @Entity
 @Data
+@Table(name = "Users")
 public class User implements Serializable {
     @Id
     @GeneratedValue
@@ -24,7 +22,7 @@ public class User implements Serializable {
     @Column(name = "role")
     String role;
     @Column(name = "enabled")
-    Bool enabled;
+    boolean enabled;
     @Column(name = "clearanceLevel")
     Integer clearanceLevel;
 }
