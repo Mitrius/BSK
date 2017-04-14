@@ -1,6 +1,7 @@
 package com.bsk.entities;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Entity
 @Table(name = "Employees")
 @Data
+@ToString(exclude = {"transactions"})
 public class Employee implements Serializable {
     @Id
     @GeneratedValue
@@ -27,6 +29,4 @@ public class Employee implements Serializable {
 
     @OneToMany(mappedBy = "employee")
     private Set<ShopTransaction> transactions;
-    @OneToMany(mappedBy = "employee")
-    private Set<AccessLevelChange> accessLevelChanges;
 }

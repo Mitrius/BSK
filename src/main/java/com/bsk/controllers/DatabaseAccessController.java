@@ -5,10 +5,9 @@ import com.bsk.services.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -22,10 +21,11 @@ public class DatabaseAccessController {
 
     @RequestMapping(value = "/getPossibleTables")
     //Zwróć dostępne tablice dla użytkownika
-    public
-    @ResponseBody
-    List<String> getPossibleTables(HttpSession session) {
-        return videoService.getAllVideos().stream().map(Video::toString).collect(Collectors.toList());
+    public ModelAndView getPossibleTables(HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView("tableDataView");
+        modelAndView.getModelMap().addAttribute("videoListString",
+                videoService.getAllVideos().stream().map(Video::toString).collect(Collectors.toList()));
+        return modelAndView;
     }
 
 }
