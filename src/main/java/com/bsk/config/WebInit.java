@@ -10,7 +10,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class WebInit extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[]{RootConfig.class};
+        return new Class<?>[]{WebSecurityConfig.class};
     }
 
     protected Class<?>[] getServletConfigClasses() {
@@ -20,4 +20,6 @@ public class WebInit extends AbstractAnnotationConfigDispatcherServletInitialize
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
+
+
 }

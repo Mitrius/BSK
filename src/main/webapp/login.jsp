@@ -3,22 +3,23 @@
 <html>
 <head>
     <title>Remote Mac interface</title>
-    <link rel="stylesheet" href="<c:url value="static/tableViewStyle.css"/> "/>
+    <link rel="stylesheet" href="<c:url value="static/Style.css"/> "/>
 </head>
 <body>
 <div id="logDiv">
     <h3 style="text-align: center">Logowanie</h3>
-    <form id="loginForm" method="post" action="${pageContext.request.contextPath}/userLogin">
+    <form id="loginForm" method="post" action="${pageContext.request.contextPath}/login">
         <label>
             Login użytkownika:
-            <input type="text" name="userLogin">
+            <input type="text" name="username">
         </label>
         <label>
             Hasło:
-            <input type="password" name="userPassword">
+            <input type="password" name="password">
         </label>
         <br>
-        <input type="submit" value="zaloguj ">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <input name="submit" type="submit" value="zaloguj ">
     </form>
 </div>
 </body>

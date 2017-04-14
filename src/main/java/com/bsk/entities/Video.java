@@ -11,9 +11,9 @@ import java.util.Set;
  * Created by Mitrius on 14.03.17.
  */
 @Data
-@ToString(exclude = {"id", "rentalSet"})
 @Entity
 @Table(name = "Videos")
+@ToString(exclude = {"id", "rentalSet"})
 public class Video implements Serializable {
     @Id
     @GeneratedValue
@@ -25,9 +25,6 @@ public class Video implements Serializable {
     private Double price;
     @Column(name = "status")
     private String status;
-    @Column(name = "objectclass")
-    private Integer objectClass;
-
 
     @OneToMany(mappedBy = "video", fetch = FetchType.LAZY)
     private Set<Rental> rentalSet;

@@ -22,8 +22,6 @@ public class Rental implements Serializable {
     private Date rentalDate;
     @Column(name = "tillDate")
     private Date tillDate;
-    @Column(name = "objectClass")
-    private Integer objectClass;
 
     @ManyToOne
     @JoinColumn(name = "transaction")

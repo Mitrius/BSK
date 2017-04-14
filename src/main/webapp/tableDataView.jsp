@@ -4,11 +4,11 @@
 <html>
 <head>
     <title>Podgląd tabeli</title>
-    <link rel="stylesheet" href="<c:url value="static/tableViewStyle.css"/> "/>
+    <link rel="stylesheet" href="<c:url value="static/Style.css"/> "/>
 </head>
 <body>
 <div id="userInfo">
-    <p>Zalogowano jako użytkownik ${user}</p>
+    <p>Zalogowano jako użytkownik</p>
     <p>Stopień uprawnień: 4</p>
     <form action="${pageContext.request.contextPath}/logout" id="submitButt">
         <input type="submit" value="wyloguj">

@@ -18,8 +18,4 @@ public class AccessLevelChange implements Serializable {
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     Employee employee;
 
-    @Column(name = "objectClass")
-    Integer objectClass;
-
-
 }

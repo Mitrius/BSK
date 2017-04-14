@@ -21,8 +21,6 @@ public class Customer implements Serializable {
     private String name;
     @Column(name = "surname")
     private String surname;
-    @Column(name = "objectClass")
-    private Integer objectClass;
 
     @OneToMany(mappedBy = "customer")
     private Set<ShopTransaction> transactions;

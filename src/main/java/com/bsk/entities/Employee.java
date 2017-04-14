@@ -24,10 +24,6 @@ public class Employee implements Serializable {
     private String surname;
     @Column(name = "position")
     private String position;
-    @Column(name = "objectClass")
-    private Integer objectClass;
-    @Column(name = "userClearanceLevel")
-    private String userClearanceLevel;
 
     @OneToMany(mappedBy = "employee")
     private Set<ShopTransaction> transactions;

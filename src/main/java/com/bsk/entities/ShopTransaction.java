@@ -17,8 +17,6 @@ public class ShopTransaction implements Serializable {
     @GeneratedValue
     @Column(name = "id")
     private Integer id;
-    @Column(name = "objectClass")
-    private Integer objectClass;
 
     @ManyToOne
     @JoinColumn(name = "employee")
