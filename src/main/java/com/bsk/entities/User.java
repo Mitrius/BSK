@@ -1,5 +1,6 @@
 package com.bsk.entities;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -18,10 +19,12 @@ public class User implements Serializable {
     @GeneratedValue
     @Column(name = "id")
     Integer id;
-    @Column(name = "salt")
-    String salt;
     @Column(name = "password")
     String password;
+    @Column(name = "role")
+    String role;
+    @Column(name = "enabled")
+    Bool enabled;
     @Column(name = "clearanceLevel")
     Integer clearanceLevel;
 }

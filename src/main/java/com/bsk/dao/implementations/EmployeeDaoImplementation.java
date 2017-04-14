@@ -19,7 +19,6 @@ public class EmployeeDaoImplementation extends AbstractDao<Integer, Employee> im
         Employee employee = getByKey(id);
         if (employee != null) {
             Hibernate.initialize(employee.getTransactions());
-            Hibernate.initialize(employee.getAccessLevelChanges());
         }
         return employee;
     }
