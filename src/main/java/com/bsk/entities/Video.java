@@ -1,7 +1,6 @@
 package com.bsk.entities;
 
 import lombok.Data;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,7 +12,6 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "Videos")
-@ToString(exclude = {"rentalSet"}, includeFieldNames = false)
 public class Video implements Serializable {
     @Id
     @GeneratedValue
@@ -28,4 +26,13 @@ public class Video implements Serializable {
 
     @OneToMany(mappedBy = "video", fetch = FetchType.LAZY)
     private Set<Rental> rentalSet;
+
+    public static String getHeader() {
+        return "id,title,price,status";
+    }
+
+    public String toString() {
+        return id + "," + title + "," + price + "," + status;
+    }
+
 }

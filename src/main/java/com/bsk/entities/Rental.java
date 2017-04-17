@@ -30,6 +30,10 @@ public class Rental implements Serializable {
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     private Video video;
 
+    public static String getHeader() {
+        return "id,cost,rentalDate,tillDate,transaction,video";
+    }
+
     public String toString() {
         return id + "," + cost + "," + rentalDate + "," + tillDate + "," + transaction.getId() + "," + video.getId();
     }

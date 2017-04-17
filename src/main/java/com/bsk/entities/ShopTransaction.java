@@ -11,7 +11,7 @@ import java.util.Set;
  */
 @Entity
 @Data
-@Table(name = "Transactions")
+@Table(name = "ShopTransactions")
 public class ShopTransaction implements Serializable {
     @Id
     @GeneratedValue
@@ -29,9 +29,11 @@ public class ShopTransaction implements Serializable {
     @OneToMany(mappedBy = "transaction")
     private Set<Rental> rentals;
 
-    public String toString() {
-        return id + "," + employee.getId() + "," + customer.getId();
+    public static String getHeader() {
+        return "id,employee,customer";
     }
 
-
+    public String toString() {
+        return id + "," + employee + "," + customer;
+    }
 }

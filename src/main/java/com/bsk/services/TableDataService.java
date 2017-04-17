@@ -18,19 +18,23 @@ public class TableDataService {
     @Autowired
     List<AbstractDao> daos;
 
-    public List<String> getSpecificTable(String tableName) {
-        String entityName = tableName.substring(0, tableName.length() - 1);
+    public List<Object> getSpecificTable(String tableName) {
         List<Object> entitiesList = daos.stream()
                 .filter(abstractDao -> abstractDao
                         .getClass()
                         .getName()
-                        .contains(entityName))
+                        .contains(tableName))
                 .map(AbstractDao::findAll).collect(Collectors.toList());
-        List<String> entities = entitiesList.stream()
-                .map(c -> c.toString())
-                .map(c -> c.replaceAll("[^a-zA-Z0-9,]", ""))
-                .collect(Collectors.toList());
-        return entities;
+        return entitiesList;
+    }
+
+    public void insertValue(Object object) {
+        String entityName = object.getClass().getName();
+        AbstractDao properDao = daos.stream().filter(abstractDao -> abstractDao
+                .getClass()
+                .getName()
+                .contains(entityName)).collect(Collectors.toList()).get(0);
+        properDao.persist(object);
     }
 
 }
