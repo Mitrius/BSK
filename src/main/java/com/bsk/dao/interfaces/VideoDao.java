@@ -12,5 +12,5 @@ public interface VideoDao {
 
     void save(Video video);
 
-    List<Video> findAllVideos();
+    List<Video> findAll();
 }

@@ -1,6 +1,7 @@
 package com.bsk.entities;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,9 +13,9 @@ import java.util.Set;
 @Entity
 @Data
 @Table(name = "Customers")
+@ToString(exclude = "transactions", includeFieldNames = false)
 public class Customer implements Serializable {
 
-    static final String HEADER = "ID,NAME,SURNAME";
     @Id
     @GeneratedValue
     @Column(name = "id")

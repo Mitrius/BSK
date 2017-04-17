@@ -28,19 +28,38 @@
     </form>
 </div>
 <div id="tables">
-    <c:choose>
-        <c:when test="${not empty possibleTables}">
-            <form action="${pageContext.request.contextPath}/getSpecificTable">
+    <div id="availableTables">
+        <c:choose>
+            <c:when test="${not empty possibleTables}">
+                <form action="${pageContext.request.contextPath}/getSpecificTable">
+                    <table>
+                        <tr>
+                            <c:forEach var="table" items="${possibleTables}">
+                                <td><input type="submit" value="${table}" name="tableName"></td>
+                            </c:forEach>
+                        </tr>
+                    </table>
+                </form>
+            </c:when>
+        </c:choose>
+    </div>
+    <div id="detailedTableView">
+        <c:choose>
+            <c:when test="${not empty table}">
                 <table>
-                    <tr>
-                        <c:forEach var="table" items="${possibleTables}">
-                            <td><input type="submit" value="${table}" name="tableName"></td>
-                        </c:forEach>
-                    </tr>
+                    <c:forEach var="tableRow" items="${table}">
+                        <tr>
+                            <c:forTokens var="tableCell" items="${tableRow}" delims=",">
+                                <td>
+                                    <c:out value="${tableCell}"/>
+                                </td>
+                            </c:forTokens>
+                        </tr>
+                    </c:forEach>
                 </table>
-            </form>
-        </c:when>
-    </c:choose>
+            </c:when>
+        </c:choose>
+    </div>
 </div>
 </body>
 </html>

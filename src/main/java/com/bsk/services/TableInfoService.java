@@ -17,17 +17,19 @@ import java.util.stream.Collectors;
 @Service("TableInfo")
 @Transactional
 public class TableInfoService {
+
     @Autowired
-    UserDao userDao;
+    UserDao dao;
     @Autowired
     TableClassLevelDao tableClassLevelDao;
 
     public List<String> getUserPossibleTables(String username) {
         List<TableClassLevel> filteredTables = tableClassLevelDao
-                .findAllTableClassLevels()
+                .findAll()
                 .stream()
-                .filter(c -> c.getClassLevel() <= userDao.findByID(username).getClearanceLevel())
+                .filter(c -> c.getClassLevel() <= dao.findByID(username).getClearanceLevel())
                 .collect(Collectors.toList());
+
         return new ArrayList<>(filteredTables.stream().map(TableClassLevel::getTableName).collect(Collectors.toList()));
 
     }

@@ -12,5 +12,5 @@ public interface RentalDao {
 
     void save(Rental rental);
 
-    List<Rental> findAllRentals();
+    List<Rental> findAll();
 }

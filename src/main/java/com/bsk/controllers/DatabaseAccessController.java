@@ -1,7 +1,7 @@
 package com.bsk.controllers;
 
+import com.bsk.services.TableDataService;
 import com.bsk.services.TableInfoService;
-import com.bsk.services.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,16 +16,16 @@ import java.util.List;
  */
 @Controller
 public class DatabaseAccessController {
-
-    @Autowired
-    private VideoService videoService;
     @Autowired
     private TableInfoService tableInfoService;
+    @Autowired
+    private TableDataService tableDataService;
 
     @RequestMapping(value = "/getSpecificTable")
     public ModelAndView getSpecificTable(@RequestParam String tableName) {
         ModelAndView modelAndView = new ModelAndView("tableDataView");
-
+        List<String> tableContent = tableDataService.getSpecificTable(tableName);
+        modelAndView.getModelMap().addAttribute("table", tableContent);
         return modelAndView;
     }
     @RequestMapping(value = "/getPossibleTables")
@@ -35,7 +35,8 @@ public class DatabaseAccessController {
         List<String> possibleTables = tableInfoService.getUserPossibleTables(principal.getName());
         ModelAndView modelAndView = new ModelAndView("tableDataView");
 
-        //Pokazemy mu labelele
+
+        //Pokazemy mu labele
         modelAndView.getModelMap().addAttribute("possibleTables", possibleTables);
 
         return modelAndView;

@@ -14,7 +14,7 @@ import java.util.Set;
 @Entity
 @Table(name = "Employees")
 @Data
-@ToString(exclude = {"transactions"})
+@ToString(exclude = {"transactions"}, includeFieldNames = false)
 public class Employee implements Serializable {
     @Id
     @GeneratedValue

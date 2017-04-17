@@ -16,7 +16,6 @@ import java.util.List;
 @Service("RegisterService")
 @Transactional
 public class RegisterService {
-
     @Autowired
     UserDao userDao;
 
@@ -37,8 +36,7 @@ public class RegisterService {
     }
 
     public List<User> getAllUsers() {
-        List<User> temp = userDao.findAllUsers();
-        return temp;
+        return userDao.findAll();
     }
 
 }

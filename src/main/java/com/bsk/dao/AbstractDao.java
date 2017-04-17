@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 /**
  * Created by Mitrius on 03.04.17.
@@ -24,6 +25,10 @@ public class AbstractDao<PK extends Serializable, T> {
     public Session getCurrentSession() {
         Session temp = sessionFactory.getCurrentSession();
         return temp;
+    }
+
+    public List<T> findAll() {
+        return (List<T>) createEntityCriteria().list();
     }
 
     public T getByKey(PK key) {

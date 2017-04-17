@@ -29,9 +29,9 @@ public class CustomerDaoImplementation extends AbstractDao<Integer, Customer> im
     }
 
     @Override
-    public List<Customer> findAllCustomers() {
+    public List<Customer> findAll() {
         Criteria criteria = createEntityCriteria();
-        List temp = criteria.list();
         return (List<Customer>) criteria.list();
     }
+
 }

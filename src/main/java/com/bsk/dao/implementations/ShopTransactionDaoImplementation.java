@@ -30,7 +30,7 @@ public class ShopTransactionDaoImplementation extends AbstractDao<Integer, ShopT
     }
 
     @Override
-    public List<ShopTransaction> findAllTransactions() {
+    public List<ShopTransaction> findAll() {
         Criteria criteria = createEntityCriteria();
         return (List<ShopTransaction>) criteria.list();
     }

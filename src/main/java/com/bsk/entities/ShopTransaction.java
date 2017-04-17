@@ -29,5 +29,9 @@ public class ShopTransaction implements Serializable {
     @OneToMany(mappedBy = "transaction")
     private Set<Rental> rentals;
 
+    public String toString() {
+        return id + "," + employee.getId() + "," + customer.getId();
+    }
+
 
 }

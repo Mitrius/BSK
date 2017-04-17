@@ -24,7 +24,7 @@ public class UserDaoImplementation extends AbstractDao<String, User> implements 
     }
 
     @Override
-    public List<User> findAllUsers() {
+    public List<User> findAll() {
         Criteria criteria = createEntityCriteria();
         return (List<User>) criteria.list();
     }

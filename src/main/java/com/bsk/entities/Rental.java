@@ -29,4 +29,8 @@ public class Rental implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     private Video video;
+
+    public String toString() {
+        return id + "," + cost + "," + rentalDate + "," + tillDate + "," + transaction.getId() + "," + video.getId();
+    }
 }

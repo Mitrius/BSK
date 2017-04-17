@@ -24,7 +24,7 @@ public class RentalDaoImplementation extends AbstractDao<Integer, Rental> implem
     }
 
     @Override
-    public List<Rental> findAllRentals() {
+    public List<Rental> findAll() {
         Criteria criteria = createEntityCriteria();
         List temp = criteria.list();
         return (List<Rental>) criteria.list();

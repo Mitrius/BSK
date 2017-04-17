@@ -29,7 +29,7 @@ public class EmployeeDaoImplementation extends AbstractDao<Integer, Employee> im
     }
 
     @Override
-    public List<Employee> findAllEmployees() {
+    public List<Employee> findAll() {
         Criteria criteria = createEntityCriteria();
         List temp = criteria.list();
         return (List<Employee>) criteria.list();

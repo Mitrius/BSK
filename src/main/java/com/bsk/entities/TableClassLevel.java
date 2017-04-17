@@ -1,6 +1,7 @@
 package com.bsk.entities;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Data
 @Table(name = "TableClassLevels")
+@ToString(includeFieldNames = false)
 public class TableClassLevel {
     @Id
     @Column(name = "tableName")

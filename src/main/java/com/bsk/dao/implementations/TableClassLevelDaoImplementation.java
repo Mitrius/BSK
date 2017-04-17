@@ -25,7 +25,7 @@ public class TableClassLevelDaoImplementation extends AbstractDao<Integer, Table
     }
 
     @Override
-    public List<TableClassLevel> findAllTableClassLevels() {
+    public List<TableClassLevel> findAll() {
         Criteria crit = createEntityCriteria();
         return (List<TableClassLevel>) crit.list();
     }

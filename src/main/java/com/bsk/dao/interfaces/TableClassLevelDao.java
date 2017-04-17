@@ -12,5 +12,5 @@ public interface TableClassLevelDao {
 
     void save(TableClassLevel tableClassLevel);
 
-    List<TableClassLevel> findAllTableClassLevels();
+    List<TableClassLevel> findAll();
 }

@@ -13,7 +13,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "Videos")
-@ToString(exclude = {"rentalSet"})
+@ToString(exclude = {"rentalSet"}, includeFieldNames = false)
 public class Video implements Serializable {
     @Id
     @GeneratedValue

@@ -12,5 +12,5 @@ public interface EmployeeDao {
 
     void save(Employee employee);
 
-    List<Employee> findAllEmployees();
+    List<Employee> findAll();
 }

@@ -6,7 +6,6 @@ import com.bsk.entities.Video;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,7 +14,6 @@ import java.util.List;
  */
 @Repository("videoDao")
 public class VideoDaoImplementation extends AbstractDao<Integer, Video> implements VideoDao {
-    @Transactional
     @Override
     public Video findByID(Integer id) {
         Video video = getByKey(id);
@@ -31,7 +29,7 @@ public class VideoDaoImplementation extends AbstractDao<Integer, Video> implemen
     }
 
     @Override
-    public List<Video> findAllVideos() {
+    public List<Video> findAll() {
         Criteria criteria = createEntityCriteria();
         return (List<Video>) criteria.list();
     }

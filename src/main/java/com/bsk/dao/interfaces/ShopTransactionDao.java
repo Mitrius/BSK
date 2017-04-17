@@ -12,5 +12,5 @@ public interface ShopTransactionDao {
 
     void save(ShopTransaction shopTransaction);
 
-    List<ShopTransaction> findAllTransactions();
+    List<ShopTransaction> findAll();
 }

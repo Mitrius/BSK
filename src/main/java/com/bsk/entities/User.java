@@ -1,6 +1,7 @@
 package com.bsk.entities;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 @Entity
 @Data
 @Table(name = "Users")
+@ToString(includeFieldNames = false)
 public class User implements Serializable {
     @Id
     @Column(name = "username")
