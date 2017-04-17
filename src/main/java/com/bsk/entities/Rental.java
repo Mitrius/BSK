@@ -12,7 +12,7 @@ import java.sql.Date;
 @Entity
 @Table(name = "Rentals")
 @Data
-public class Rental implements Serializable {
+public class Rental implements Serializable, EntityBSKClass {
     @Id
     @Column(name = "id")
     private Integer id;
@@ -30,8 +30,13 @@ public class Rental implements Serializable {
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     private Video video;
 
-    public static String getHeader() {
+    public String getHeader() {
         return "id,cost,rentalDate,tillDate,transaction,video";
+    }
+
+    @Override
+    public Integer getKey() {
+        return id;
     }
 
     public String toString() {

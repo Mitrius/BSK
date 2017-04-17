@@ -3,26 +3,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Podgląd tabeli</title>
+    <title>Podgląd tabel</title>
     <link rel="stylesheet" href="<c:url value="static/Style.css"/> "/>
 </head>
 <body>
 <div id="userInfo">
-    <p>Zalogowano jako użytkownik</p>
-    <p>Stopień uprawnień: 4</p>
-    <form action="${pageContext.request.contextPath}/logout" id="submitButt">
+    <form action="<c:url value="/logout"/>" id="submitButt">
         <input type="submit" value="wyloguj">
     </form>
-    <a href="${pageContext.request.contextPath}/register">Rejestracja</a>
+    <a href="<c:url value="/register"/>">Rejestracja</a>
 </div>
 <div id="magicButton">
-    <form action="${pageContext.request.contextPath}/getPossibleTables">
+    <form action="<c:url value="/getPossibleTables"/>" id="getTablesButt">
         <c:choose>
             <c:when test="${not empty possibleTables}">
-                <input type="submit" value="odśwież tabele">
+                <input type="submit" value="odśwież tabele"/>
             </c:when>
             <c:otherwise>
-                <input type="submit" value="wyświetl tabele">
+                <input type="submit" value="Wyświetl tabele">
             </c:otherwise>
         </c:choose>
     </form>
@@ -31,11 +29,11 @@
     <div id="availableTables">
         <c:choose>
             <c:when test="${not empty possibleTables}">
-                <form action="${pageContext.request.contextPath}/getSpecificTable">
+                <form action="<c:url value="/getSpecificTable"/>" method="get">
                     <table>
                         <tr>
                             <c:forEach var="table" items="${possibleTables}">
-                                <td><input type="submit" value="${table}" name="tableName"></td>
+                                <td><input name="tableName" type="submit" value="${table}"></td>
                             </c:forEach>
                         </tr>
                     </table>
@@ -46,18 +44,62 @@
     <div id="detailedTableView">
         <c:choose>
             <c:when test="${not empty table}">
-                <table>
-                    <c:forEach var="tableRow" items="${table}">
+                <form action="/createNewClass/${type}" method="post">
+                    <table>
                         <tr>
-                            <c:forTokens var="tableCell" items="${tableRow}" delims=",">
+                            <c:forTokens items="${entityHeader}" delims="," var="headerCell">
                                 <td>
-                                    <c:out value="${tableCell}"/>
+                                    <c:out value="${headerCell}"/>
                                 </td>
                             </c:forTokens>
                         </tr>
-                    </c:forEach>
-                </table>
+                        <c:forEach var="tableRow" items="${table}">
+                            <tr>
+                                <c:forTokens var="tableCell" items="${tableRow}" delims=",">
+                                    <td>
+                                        <c:out value="${tableCell}"/>
+                                    </td>
+                                </c:forTokens>
+                            </tr>
+                        </c:forEach>
+                        <tr>
+                            <c:forTokens items="${entityHeader}" delims="," var="headerCell">
+                                <td>
+                                    <input type="text" name="${headerCell}" value=""/>
+                                </td>
+                            </c:forTokens>
+                        </tr>
+                    </table>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <input type="submit" value="dodaj">
+                </form>
             </c:when>
+            <c:otherwise>
+                <c:choose>
+                    <c:when test="${not empty entityHeader}">
+                        <form action="/createNewClass/${type}" method="post">
+                            <table>
+                                <tr>
+                                    <c:forTokens items="${entityHeader}" delims="," var="headerCell">
+                                        <td>
+                                            <c:out value="${headerCell}"/>
+                                        </td>
+                                    </c:forTokens>
+                                </tr>
+                                <tr>
+                                    <c:forTokens items="${entityHeader}" delims="," var="headerCell">
+                                        <td>
+                                            <input type="text" name="${headerCell}" value=""/>
+                                        </td>
+                                    </c:forTokens>
+                                </tr>
+                            </table>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <input type="submit" value="dodaj"/>
+                        </form>
+                    </c:when>
+                </c:choose>
+            </c:otherwise>
         </c:choose>
     </div>
 </div>

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Mitrius on 17.04.17.
  */
-@Service("tableDataService")
+@Service("TableDataService")
 @Transactional
 public class TableDataService {
 
@@ -19,22 +19,39 @@ public class TableDataService {
     List<AbstractDao> daos;
 
     public List<Object> getSpecificTable(String tableName) {
-        List<Object> entitiesList = daos.stream()
+        List<AbstractDao> properDao = daos.stream()
                 .filter(abstractDao -> abstractDao
                         .getClass()
                         .getName()
                         .contains(tableName))
-                .map(AbstractDao::findAll).collect(Collectors.toList());
-        return entitiesList;
+                .collect(Collectors.toList());
+        if (properDao.size() > 0)
+            return properDao.get(0).findAll();
+        return null;
+    }
+
+    public Object getVerySpecificTable(String tableName, Object id) {
+        List<AbstractDao> properDao = daos.stream()
+                .filter(abstractDao -> abstractDao
+                        .getClass()
+                        .getName()
+                        .contains(tableName))
+                .collect(Collectors.toList());
+        if (properDao.size() > 0)
+            return properDao.get(0).findAll();
+        return null;
     }
 
     public void insertValue(Object object) {
-        String entityName = object.getClass().getName();
-        AbstractDao properDao = daos.stream().filter(abstractDao -> abstractDao
-                .getClass()
-                .getName()
-                .contains(entityName)).collect(Collectors.toList()).get(0);
-        properDao.persist(object);
+        String entityName = object.getClass().getSimpleName();
+        List<AbstractDao> properDao = daos.stream()
+                .filter(abstractDao -> abstractDao
+                        .getClass()
+                        .getName()
+                        .contains(entityName))
+                .collect(Collectors.toList());
+        if (properDao.size() > 0)
+            properDao.get(0).persist(object);
     }
 
 }

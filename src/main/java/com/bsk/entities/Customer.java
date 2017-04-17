@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity
 @Data
 @Table(name = "Customers")
-public class Customer implements Serializable {
+public class Customer implements Serializable, EntityBSKClass {
 
     @Id
     @GeneratedValue
@@ -26,10 +26,13 @@ public class Customer implements Serializable {
     @OneToMany(mappedBy = "customer")
     private Set<ShopTransaction> transactions;
 
-    public static String getHeader() {
-        return "id,name,surname";
+    public Integer getKey() {
+        return id;
     }
 
+    public String getHeader() {
+        return "id,name,surname";
+    }
     public String toString() {
         return id + "," + name + "," + surname;
     }

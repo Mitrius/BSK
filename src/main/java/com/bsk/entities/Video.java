@@ -12,7 +12,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "Videos")
-public class Video implements Serializable {
+public class Video implements Serializable, EntityBSKClass {
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -27,8 +27,13 @@ public class Video implements Serializable {
     @OneToMany(mappedBy = "video", fetch = FetchType.LAZY)
     private Set<Rental> rentalSet;
 
-    public static String getHeader() {
+    public String getHeader() {
         return "id,title,price,status";
+    }
+
+    @Override
+    public Serializable getKey() {
+        return id;
     }
 
     public String toString() {

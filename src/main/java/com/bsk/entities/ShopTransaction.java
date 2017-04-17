@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity
 @Data
 @Table(name = "ShopTransactions")
-public class ShopTransaction implements Serializable {
+public class ShopTransaction implements Serializable, EntityBSKClass {
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -29,8 +29,13 @@ public class ShopTransaction implements Serializable {
     @OneToMany(mappedBy = "transaction")
     private Set<Rental> rentals;
 
-    public static String getHeader() {
+    public String getHeader() {
         return "id,employee,customer";
+    }
+
+    @Override
+    public Serializable getKey() {
+        return id;
     }
 
     public String toString() {

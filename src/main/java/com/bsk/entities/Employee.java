@@ -13,7 +13,7 @@ import java.util.Set;
 @Entity
 @Table(name = "Employees")
 @Data
-public class Employee implements Serializable {
+public class Employee implements Serializable, EntityBSKClass {
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -28,8 +28,13 @@ public class Employee implements Serializable {
     @OneToMany(mappedBy = "employee")
     private Set<ShopTransaction> transactions;
 
-    public static String getHeader() {
+    public String getHeader() {
         return "id,name,surname,position";
+    }
+
+    @Override
+    public Integer getKey() {
+        return id;
     }
 
     public String toString() {

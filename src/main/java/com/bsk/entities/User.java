@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Entity
 @Data
 @Table(name = "Users")
-public class User implements Serializable {
+public class User implements Serializable, EntityBSKClass {
     @Id
     @Column(name = "username")
     String username;
@@ -27,8 +27,13 @@ public class User implements Serializable {
     @Column(name = "clearanceLevel")
     Integer clearanceLevel;
 
-    public static String getHeader() {
+    public String getHeader() {
         return "username,password,role,enabled,clearanceLevel";
+    }
+
+    @Override
+    public Serializable getKey() {
+        return username;
     }
 
     public String toString() {

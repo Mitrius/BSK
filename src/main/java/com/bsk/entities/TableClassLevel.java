@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * Created by Mitrius on 08.04.17.
@@ -13,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Data
 @Table(name = "TableClassLevels")
-public class TableClassLevel {
+public class TableClassLevel implements Serializable, EntityBSKClass {
     @Id
     @Column(name = "tableName")
     String tableName;
@@ -21,8 +22,13 @@ public class TableClassLevel {
     @Column(name = "classLevel")
     Integer classLevel;
 
-    public static String getHeader() {
+    public String getHeader() {
         return "tableName,classLevel";
+    }
+
+    @Override
+    public Serializable getKey() {
+        return tableName;
     }
 
     public String toString() {
