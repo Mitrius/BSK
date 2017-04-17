@@ -4,19 +4,17 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Created by Mitrius on 08.04.17.
  */
 @Entity
 @Data
+@Table(name = "TableClassLevels")
 public class TableClassLevel {
     @Id
-    @GeneratedValue
-    Integer id;
-
     @Column(name = "tableName")
     String tableName;
 

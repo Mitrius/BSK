@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by Krystian on 14.04.2017.
@@ -27,9 +26,9 @@ public class RegisterController {
     public String register(@RequestParam(value="username", required=true) String username,
                          @RequestParam(value="password", required=true) String password) {
         //TODO
-        User kek = registerService.getByID(Integer.parseInt(username));
+        User kek = registerService.getByID(username);
         if (kek == null){
-            registerService.registerUser(Integer.parseInt(username), password);
+            registerService.registerUser(username, password);
         }
         return "redirect:/tableView";
     }

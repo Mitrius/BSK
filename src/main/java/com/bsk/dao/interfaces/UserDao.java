@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Mitrius on 03.04.17.
  */
 public interface UserDao {
-    User findByID(Integer id);
+    User findByID(String id);
 
     void save(User user);
 

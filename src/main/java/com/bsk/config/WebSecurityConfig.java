@@ -28,8 +28,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder.jdbcAuthentication().dataSource(dataSource)
                 .passwordEncoder(passwordEncoder())
-                .usersByUsernameQuery("select id,password,enabled from Users where id=?")
-                .authoritiesByUsernameQuery("select id,role from Users where id=?");
+                .usersByUsernameQuery("select username,password,enabled from Users where username=?")
+                .authoritiesByUsernameQuery("select username,role from Users where username=?");
         //authenticationManagerBuilder.inMemoryAuthentication().withUser("Mitrius").password("pass").roles("USER");
     }
 
@@ -51,7 +51,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .defaultSuccessUrl("/tableView")
                 .and()
-                .httpBasic();
+                .httpBasic()
+                .and()
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/");
 
 
     }

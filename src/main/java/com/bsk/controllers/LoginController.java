@@ -15,6 +15,11 @@ public class LoginController {
         return "login";
     }
 
+    @RequestMapping(value = "/logout")
+    public String logout() {
+        return "login";
+    }
+
     @RequestMapping(value = "/tableView")
     public ModelAndView showTableDataView() {
         return new ModelAndView("tableDataView");

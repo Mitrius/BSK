@@ -1,36 +1,25 @@
 CREATE TABLE `Customers` (
-  `id`          INTEGER PRIMARY KEY AUTO_INCREMENT,
-  `name`        VARCHAR(255) NOT NULL,
-  `surname`     VARCHAR(255) NOT NULL,
-  `objectclass` INTEGER      NOT NULL
+  `id`      INTEGER PRIMARY KEY AUTO_INCREMENT,
+  `name`    VARCHAR(255) NOT NULL,
+  `surname` VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE `Employees` (
-  `id`                 INTEGER PRIMARY KEY AUTO_INCREMENT,
-  `userclearancelevel` INTEGER      NOT NULL,
-  `objectclass`        INTEGER      NOT NULL,
-  `name`               VARCHAR(255) NOT NULL,
-  `surname`            VARCHAR(255) NOT NULL,
-  `position`           VARCHAR(255) NOT NULL
+  `id`       INTEGER PRIMARY KEY AUTO_INCREMENT,
+  `name`     VARCHAR(255) NOT NULL,
+  `surname`  VARCHAR(255) NOT NULL,
+  `position` VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE `AccessLevelChanges` (
-  `id`          INTEGER PRIMARY KEY AUTO_INCREMENT,
-  `employee`    INTEGER NOT NULL,
-  `objectclass` INTEGER NOT NULL
+CREATE TABLE `TableClassLevels` (
+  `tablename`  VARCHAR(255) PRIMARY KEY,
+  `classlevel` INTEGER NOT NULL
 );
-
-CREATE INDEX `idx_accesslevelchanges__employee`
-  ON `AccessLevelChanges` (`employee`);
-
-ALTER TABLE `AccessLevelChanges`
-  ADD CONSTRAINT `fk_accesslevelchanges__employee` FOREIGN KEY (`employee`) REFERENCES `Employees` (`id`);
 
 CREATE TABLE `Transactions` (
-  `id`          INTEGER PRIMARY KEY AUTO_INCREMENT,
-  `objectclass` INTEGER NOT NULL,
-  `employee`    INTEGER NOT NULL,
-  `customer`    INTEGER NOT NULL
+  `id`       INTEGER PRIMARY KEY AUTO_INCREMENT,
+  `employee` INTEGER NOT NULL,
+  `customer` INTEGER NOT NULL
 );
 
 CREATE INDEX `idx_transactions__customer`
@@ -45,12 +34,19 @@ ALTER TABLE `Transactions`
 ALTER TABLE `Transactions`
   ADD CONSTRAINT `fk_transactions__employee` FOREIGN KEY (`employee`) REFERENCES `Employees` (`id`);
 
+CREATE TABLE `Users` (
+  `username`       VARCHAR(255) PRIMARY KEY,
+  `password`       VARCHAR(255) NOT NULL,
+  `clearancelevel` INTEGER      NOT NULL,
+  `role`           VARCHAR(255) NOT NULL,
+  `enabled`        INTEGER      NOT NULL
+);
+
 CREATE TABLE `Videos` (
-  `id`          INTEGER PRIMARY KEY AUTO_INCREMENT,
-  `title`       VARCHAR(255)   NOT NULL,
-  `price`       DECIMAL(12, 2) NOT NULL,
-  `objectclass` INTEGER        NOT NULL,
-  `status`      VARCHAR(255)   NOT NULL
+  `id`     INTEGER PRIMARY KEY AUTO_INCREMENT,
+  `title`  VARCHAR(255)   NOT NULL,
+  `price`  DECIMAL(12, 2) NOT NULL,
+  `status` VARCHAR(255)   NOT NULL
 );
 
 CREATE TABLE `Rentals` (
@@ -58,9 +54,8 @@ CREATE TABLE `Rentals` (
   `transaction` INTEGER        NOT NULL,
   `cost`        DECIMAL(12, 2) NOT NULL,
   `tilldate`    DATE           NOT NULL,
-  `date`        DATE           NOT NULL,
-  `objectclass` INTEGER        NOT NULL,
-  `id`          VARCHAR(255) PRIMARY KEY
+  `rentaldate`  DATE           NOT NULL,
+  `id`          INTEGER PRIMARY KEY AUTO_INCREMENT
 );
 
 CREATE INDEX `idx_rentals__transaction`

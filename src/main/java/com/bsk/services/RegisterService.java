@@ -1,10 +1,7 @@
 package com.bsk.services;
 
 import com.bsk.dao.interfaces.UserDao;
-import com.bsk.dao.interfaces.VideoDao;
 import com.bsk.entities.User;
-import com.bsk.entities.Video;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,14 +20,15 @@ public class RegisterService {
     @Autowired
     UserDao userDao;
 
-    public User getByID(Integer id) {
+    public User getByID(String id) {
         return userDao.findByID(id);
     }
 
-    public void registerUser(Integer id, String password){
+    public void registerUser(String username, String password) {
         PasswordEncoder pe = new BCryptPasswordEncoder();
         String hash = pe.encode(password);
         User user = new User();
+        user.setUsername(username);
         user.setPassword(hash);
         user.setClearanceLevel(4);
         user.setRole("USER");

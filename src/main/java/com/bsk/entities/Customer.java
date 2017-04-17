@@ -13,6 +13,8 @@ import java.util.Set;
 @Data
 @Table(name = "Customers")
 public class Customer implements Serializable {
+
+    static final String HEADER = "ID,NAME,SURNAME";
     @Id
     @GeneratedValue
     @Column(name = "id")

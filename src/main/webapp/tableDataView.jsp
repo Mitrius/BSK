@@ -13,12 +13,12 @@
     <form action="${pageContext.request.contextPath}/logout" id="submitButt">
         <input type="submit" value="wyloguj">
     </form>
-    <a href="/register">Rejestracja</a>
+    <a href="${pageContext.request.contextPath}/register">Rejestracja</a>
 </div>
 <div id="magicButton">
     <form action="${pageContext.request.contextPath}/getPossibleTables">
         <c:choose>
-            <c:when test="${not empty tables}">
+            <c:when test="${not empty possibleTables}">
                 <input type="submit" value="odśwież tabele">
             </c:when>
             <c:otherwise>
@@ -29,47 +29,16 @@
 </div>
 <div id="tables">
     <c:choose>
-        <c:when test="${not empty tables}">
-            <c:forEach var="table" items="${tables}">
-                <form>
-                    <table class="dynamicTable">
-                        <c:forEach var="row" items="${table}" varStatus="rowLoopIndex">
-                        <tr>
-                            <c:choose>
-                                <c:when test="${rowLoopIndex.index == 0}">
-                                    <td>Usuń</td>
-                                    <c:forTokens var="column" items="${row}" delims=",">
-                                        <td>
-                                            <c:out value="${column}"/>
-                                        </td>
-                                    </c:forTokens>
-                                </c:when>
-                                <c:otherwise>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                    <c:forTokens var="column" items="${row}" delims=",">
-                                        <td>
-                                            <input type="text" value="${column}">
-                                        </td>
-                                    </c:forTokens>
-                                </c:otherwise>
-                            </c:choose>
-                        </tr>
+        <c:when test="${not empty possibleTables}">
+            <form action="${pageContext.request.contextPath}/getSpecificTable">
+                <table>
+                    <tr>
+                        <c:forEach var="table" items="${possibleTables}">
+                            <td><input type="submit" value="${table}" name="tableName"></td>
                         </c:forEach>
-                        <tr>
-                            <td>
-                            </td>
-                            <c:forEach var="column" items="${table.get(1)}">
-                                <td>
-                                    <input type="text">
-                                </td>
-                            </c:forEach>
-                        </tr>
+                    </tr>
                 </table>
-                    <input type="submit">
-                </form>
-            </c:forEach>
+            </form>
         </c:when>
     </c:choose>
 </div>

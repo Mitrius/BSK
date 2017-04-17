@@ -12,9 +12,9 @@ import java.util.List;
  * Created by Mitrius on 03.04.17.
  */
 @Repository("userDao")
-public class UserDaoImplementation extends AbstractDao<Integer, User> implements UserDao {
+public class UserDaoImplementation extends AbstractDao<String, User> implements UserDao {
     @Override
-    public User findByID(Integer id) {
+    public User findByID(String id) {
         return getByKey(id);
     }
 
