@@ -44,7 +44,7 @@
     <div id="detailedTableView">
         <c:choose>
             <c:when test="${not empty table}">
-                <form action="/createNewClass/${type}" method="post">
+
                     <table>
                         <tr>
                             <c:forTokens items="${entityHeader}" delims="," var="headerCell">
@@ -54,14 +54,23 @@
                             </c:forTokens>
                         </tr>
                         <c:forEach var="tableRow" items="${table}">
+                            <form action="/delete" method="post">
                             <tr>
                                 <c:forTokens var="tableCell" items="${tableRow}" delims=",">
                                     <td>
                                         <c:out value="${tableCell}"/>
                                     </td>
                                 </c:forTokens>
+                                <td>
+                                    <input type="hidden" name="key" value="${tableRow.split(",")[0]}"/>
+                                    <input type="hidden" name="tableName" value="${type}"/>
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                    <input type="submit" value="DeleteMe"/>
+                                </td>
                             </tr>
+                            </form>
                         </c:forEach>
+                        <form id="create" action="/createNewClass/${type}" method="post">
                         <tr>
                             <c:forTokens items="${entityHeader}" delims="," var="headerCell">
                                 <td>
@@ -69,10 +78,10 @@
                                 </td>
                             </c:forTokens>
                         </tr>
+                        </form>
                     </table>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    <input type="submit" value="dodaj">
-                </form>
+                    <input form="create" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <input form="create" type="submit" value="dodaj">
             </c:when>
             <c:otherwise>
                 <c:choose>

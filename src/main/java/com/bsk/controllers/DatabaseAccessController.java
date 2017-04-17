@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by Mitrius on 13.03.17.
@@ -15,6 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class DatabaseAccessController {
     @Autowired
     private TableDataService tableDataService;
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public String deleteEntity(@RequestParam(value="key", required=true) String key,
+                               @RequestParam(value="tableName", required=true) String tableName){
+        tableDataService.deleteEntity(key, tableName);
+        return "tableDataView";
+    }
 
     @RequestMapping(value = "/createNewClass/Customer", method = RequestMethod.POST)
     public String createNewEntity(@ModelAttribute Customer cust) {
