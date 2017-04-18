@@ -16,22 +16,22 @@ CREATE TABLE `TableClassLevels` (
   `classlevel` INTEGER NOT NULL
 );
 
-CREATE TABLE `ShopTransactions` (
+CREATE TABLE `Transactions` (
   `id`       INTEGER PRIMARY KEY AUTO_INCREMENT,
   `employee` INTEGER NOT NULL,
   `customer` INTEGER NOT NULL
 );
 
 CREATE INDEX `idx_transactions__customer`
-  ON `ShopTransactions` (`customer`);
+  ON `Transactions` (`customer`);
 
 CREATE INDEX `idx_transactions__employee`
-  ON `ShopTransactions` (`employee`);
+  ON `Transactions` (`employee`);
 
-ALTER TABLE `ShopTransactions`
+ALTER TABLE `Transactions`
   ADD CONSTRAINT `fk_transactions__customer` FOREIGN KEY (`customer`) REFERENCES `Customers` (`id`);
 
-ALTER TABLE `ShopTransactions`
+ALTER TABLE `Transactions`
   ADD CONSTRAINT `fk_transactions__employee` FOREIGN KEY (`employee`) REFERENCES `Employees` (`id`);
 
 CREATE TABLE `Users` (
@@ -65,7 +65,7 @@ CREATE INDEX `idx_rentals__video`
   ON `Rentals` (`video`);
 
 ALTER TABLE `Rentals`
-  ADD CONSTRAINT `fk_rentals__transaction` FOREIGN KEY (`transaction`) REFERENCES `ShopTransactions` (`id`);
+  ADD CONSTRAINT `fk_rentals__transaction` FOREIGN KEY (`transaction`) REFERENCES `Transactions` (`id`);
 
 ALTER TABLE `Rentals`
   ADD CONSTRAINT `fk_rentals__video` FOREIGN KEY (`video`) REFERENCES `Videos` (`id`)

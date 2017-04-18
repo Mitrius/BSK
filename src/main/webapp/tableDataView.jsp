@@ -54,7 +54,7 @@
                             </c:forTokens>
                         </tr>
                         <c:forEach var="tableRow" items="${table}">
-                            <form action="/delete" method="post">
+                            <form action="<c:url value="/delete"/>" method="post">
                             <tr>
                                 <c:forTokens var="tableCell" items="${tableRow}" delims=",">
                                     <td>

@@ -37,7 +37,7 @@ public class Video implements Serializable, EntityBSKClass {
     }
 
     public String toString() {
-        return id + "," + title + "," + price + "," + status;
+        return id + "," + title + "," + price.toString() + "," + status;
     }
 
 }

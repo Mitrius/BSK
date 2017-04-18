@@ -1,6 +1,5 @@
 package com.bsk.controllers.ViewControllers;
 
-import com.bsk.entities.EntityBSKClass;
 import com.bsk.services.TableDataService;
 import com.bsk.services.TableInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,21 +32,20 @@ public class DataViewController {
 
         ModelAndView modelAndView = new ModelAndView("tableDataView");
         List<Object> entities = tableDataService.getSpecificTable(className);
-        String classHeader = "";
-        if (entities.size() == 0) { //Jeśli smuteg i nie mamy takich obiektów :(
-            Class<?> cls = Class.forName("com.bsk.entities." + className);
-            Method met = cls.getDeclaredMethod("getHeader", (Class<?>[]) null);
-            Object ret = cls.newInstance();
-            classHeader = (String) met.invoke(ret);
-        } else
-            classHeader = ((EntityBSKClass) entities.get(0)).getHeader();
+
+        Class<?> cls = Class.forName("com.bsk.entities." + className);
+        Method met = cls.getDeclaredMethod("getHeader", (Class<?>[]) null);
+        Object ret = cls.newInstance();
+        String classHeader = (String) met.invoke(ret);
+
         List<String> entitiesString = entities.stream()
                 .map(c -> c.toString())
-                .map(c -> c.replaceAll("[^a-zA-Z0-9,]", ""))
+                .map(c -> c.replaceAll("[^a-zA-Z0-9,.]", ""))
                 .collect(Collectors.toList());
         modelAndView.getModelMap().addAttribute("table", entitiesString);
         modelAndView.getModelMap().addAttribute("type", className);
         modelAndView.getModelMap().addAttribute("entityHeader", classHeader);
+
         return modelAndView;
     }
 
