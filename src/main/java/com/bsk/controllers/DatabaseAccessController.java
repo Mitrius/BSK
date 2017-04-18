@@ -24,6 +24,13 @@ public class DatabaseAccessController {
         return "tableDataView";
     }
 
+    @RequestMapping(value = "/editEntity/Video", method = RequestMethod.POST)
+    public String editEntity(@ModelAttribute Video video,
+                             @RequestParam(value="key") String key) {
+        tableDataService.editVideo(video, Integer.parseInt(key));
+        return "tableDataView";
+    }
+
     @RequestMapping(value = "/createNewClass/Customer", method = RequestMethod.POST)
     public String createNewEntity(@ModelAttribute Customer cust) {
         cust.setId(null);

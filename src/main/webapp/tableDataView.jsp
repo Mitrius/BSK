@@ -54,7 +54,8 @@
                             </c:forTokens>
                         </tr>
                         <c:forEach var="tableRow" items="${table}">
-                            <form action="<c:url value="/delete"/>" method="post">
+                            <form id="delete${tableRow.split(",")[0]}" action="<c:url value="/delete"/>" method="post"></form>
+                            <form id="edit${tableRow.split(",")[0]}" action="<c:url value="/editEntity"/>" method="post"></form>
                             <tr>
                                 <c:forTokens var="tableCell" items="${tableRow}" delims=",">
                                     <td>
@@ -62,13 +63,18 @@
                                     </td>
                                 </c:forTokens>
                                 <td>
-                                    <input type="hidden" name="key" value="${tableRow.split(",")[0]}"/>
-                                    <input type="hidden" name="tableName" value="${type}"/>
-                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                    <input type="submit" value="DeleteMe"/>
+                                    <input form="edit${tableRow.split(",")[0]}" type="hidden" name="id" value="${tableRow.split(",")[0]}"/>
+                                    <input form="edit${tableRow.split(",")[0]}" type="hidden" name="type" value="${type}"/>
+                                    <input form="edit${tableRow.split(",")[0]}" type="hidden" name="entityHeader" value="${entityHeader}"/>
+                                    <input form="edit${tableRow.split(",")[0]}" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                    <input form="edit${tableRow.split(",")[0]}" type="submit" value="EditMe"/>
+                                    <input form="delete${tableRow.split(",")[0]}" type="hidden" name="key" value="${tableRow.split(",")[0]}"/>
+                                    <input form="delete${tableRow.split(",")[0]}" type="hidden" name="tableName" value="${type}"/>
+                                    <input form="delete${tableRow.split(",")[0]}" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                    <input form="delete${tableRow.split(",")[0]}" type="submit" value="DeleteMe"/>
                                 </td>
                             </tr>
-                            </form>
+
                         </c:forEach>
                         <form id="create" action="/createNewClass/${type}" method="post">
                         <tr>

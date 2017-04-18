@@ -16,7 +16,7 @@ public class EntityEditController {
     TableDataService tableDataService;
 
     @RequestMapping(value = "/editEntity")
-    public ModelAndView editEntity(@RequestParam String type, @RequestParam Object id, @RequestParam String entityHeader) {
+    public ModelAndView editEntity(@RequestParam String type, @RequestParam String id, @RequestParam String entityHeader) {
         ModelAndView modelAndView = new ModelAndView("editView");
         String entity = tableDataService.getVerySpecificTable(type, id).toString();
 

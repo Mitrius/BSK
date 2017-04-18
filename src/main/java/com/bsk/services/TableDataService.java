@@ -1,6 +1,7 @@
 package com.bsk.services;
 
 import com.bsk.dao.AbstractDao;
+import com.bsk.entities.Video;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,8 +36,13 @@ public class TableDataService {
         return getProperDaoInstance(tableName).findAll();
     }
 
-    public Object getVerySpecificTable(String tableName, Object id) {
-        return getProperDaoInstance(tableName).getByKey((Serializable) id);
+    public Object getVerySpecificTable(String tableName, String id) {
+        try{
+            return getProperDaoInstance(tableName).getByKey(id);
+        }
+        catch (org.hibernate.TypeMismatchException e){
+            return getProperDaoInstance(tableName).getByKey(Integer.parseInt(id));
+        }
     }
 
     public void deleteEntity(String key, String tableName){
@@ -47,9 +53,21 @@ public class TableDataService {
             properDao.delete(obj);
     }
 
+
+
     public void insertValue(Object object) {
         String entityName = object.getClass().getSimpleName();
         getProperDaoInstance(entityName).persist(object);
     }
 
+    public void editVideo(Video newObject, int key){
+        AbstractDao properDao = getProperDaoInstance(Video.class.getSimpleName());
+        Video obj = (Video) properDao.getByKey(key);
+        obj.setId(newObject.getId());
+        obj.setPrice(newObject.getPrice());
+        obj.setRentalSet(newObject.getRentalSet());
+        obj.setStatus(newObject.getStatus());
+        obj.setTitle(newObject.getTitle());
+        properDao.update(obj);
+    }
 }
