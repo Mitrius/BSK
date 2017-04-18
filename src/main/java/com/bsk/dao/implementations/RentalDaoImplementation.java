@@ -17,6 +17,10 @@ public class RentalDaoImplementation extends AbstractDao<Integer, Rental> implem
     public Rental findByID(Integer id) {
         return getByKey(id);
     }
+    @Override
+    public Integer convertToKeyType(String key) {
+        return Integer.parseInt(key);
+    }
 
     @Override
     public void save(Rental rental) {
@@ -26,7 +30,6 @@ public class RentalDaoImplementation extends AbstractDao<Integer, Rental> implem
     @Override
     public List<Rental> findAll() {
         Criteria criteria = createEntityCriteria();
-        List temp = criteria.list();
         return (List<Rental>) criteria.list();
     }
 }

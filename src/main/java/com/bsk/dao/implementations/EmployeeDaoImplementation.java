@@ -24,6 +24,10 @@ public class EmployeeDaoImplementation extends AbstractDao<Integer, Employee> im
     }
 
     @Override
+    public Integer convertToKeyType(String key) {
+        return Integer.parseInt(key);
+    }
+    @Override
     public void save(Employee employee) {
         persist(employee);
     }

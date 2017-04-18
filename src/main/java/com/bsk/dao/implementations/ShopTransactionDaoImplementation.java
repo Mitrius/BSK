@@ -25,6 +25,10 @@ public class ShopTransactionDaoImplementation extends AbstractDao<Integer, ShopT
     }
 
     @Override
+    public Integer convertToKeyType(String key) {
+        return Integer.parseInt(key);
+    }
+    @Override
     public void save(ShopTransaction shopTransaction) {
         persist(shopTransaction);
     }

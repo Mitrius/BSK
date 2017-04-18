@@ -25,6 +25,10 @@ public class TableClassLevelDaoImplementation extends AbstractDao<Integer, Table
     }
 
     @Override
+    public Integer convertToKeyType(String key) {
+        return Integer.parseInt(key);
+    }
+    @Override
     public List<TableClassLevel> findAll() {
         Criteria crit = createEntityCriteria();
         return (List<TableClassLevel>) crit.list();

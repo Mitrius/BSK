@@ -22,12 +22,15 @@ public class CustomerDaoImplementation extends AbstractDao<Integer, Customer> im
         }
         return customer;
     }
-
     @Override
     public void save(Customer customer) {
         persist(customer);
     }
 
+    @Override
+    public Integer convertToKeyType(String key) {
+        return Integer.parseInt(key);
+    }
     @Override
     public List<Customer> findAll() {
         Criteria criteria = createEntityCriteria();

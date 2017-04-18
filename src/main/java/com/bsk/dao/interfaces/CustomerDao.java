@@ -9,7 +9,6 @@ import java.util.List;
  */
 public interface CustomerDao {
     Customer findByID(Integer id);
-
     void save(Customer customer);
 
     List<Customer> findAll();

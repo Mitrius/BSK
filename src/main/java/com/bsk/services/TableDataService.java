@@ -41,14 +41,10 @@ public class TableDataService {
 
     public void deleteEntity(String key, String tableName){
         AbstractDao properDao = getProperDaoInstance(tableName);
-        Object obj = null;
-            //XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
-        try {
-            obj = properDao.getByKey(key);
-        } catch (org.hibernate.TypeMismatchException e) {
-            obj = properDao.getByKey(Integer.parseInt(key));
-        }
-        if (obj != null) properDao.delete(obj);
+        Serializable keyProper = properDao.convertToKeyType(key);
+        Object obj = properDao.findByID(keyProper);
+        if (obj != null)
+            properDao.delete(obj);
     }
 
     public void insertValue(Object object) {

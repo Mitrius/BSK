@@ -14,27 +14,33 @@ import java.util.List;
  */
 public class AbstractDao<PK extends Serializable, T> {
     private final Class<T> persistentClass;
+    @Autowired
+    private SessionFactory sessionFactory;
 
     public AbstractDao() {
         this.persistentClass = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
     }
-
-    @Autowired
-    private SessionFactory sessionFactory;
 
     public Session getCurrentSession() {
         Session temp = sessionFactory.getCurrentSession();
         return temp;
     }
 
+    public T findByID(PK id) {
+        return (T) getCurrentSession().get(persistentClass, id);
+    }
     public List<T> findAll() {
         return (List<T>) createEntityCriteria().list();
     }
 
     public T getByKey(PK key) {
+
         return (T) getCurrentSession().get(persistentClass, key);
     }
 
+    public Serializable convertToKeyType(String key) {
+        return null;
+    }
     public void persist(T entity) {
         getCurrentSession().persist(entity);
     }

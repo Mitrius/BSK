@@ -24,6 +24,10 @@ public class VideoDaoImplementation extends AbstractDao<Integer, Video> implemen
     }
 
     @Override
+    public Integer convertToKeyType(String key) {
+        return Integer.parseInt(key);
+    }
+    @Override
     public void save(Video video) {
         persist(video);
     }
