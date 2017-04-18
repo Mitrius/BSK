@@ -4,7 +4,6 @@ import com.bsk.dao.AbstractDao;
 import com.bsk.dao.interfaces.VideoDao;
 import com.bsk.entities.Video;
 import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,14 +13,6 @@ import java.util.List;
  */
 @Repository("videoDao")
 public class VideoDaoImplementation extends AbstractDao<Integer, Video> implements VideoDao {
-    @Override
-    public Video findByID(Integer id) {
-        Video video = getByKey(id);
-        if (video != null) {
-            Hibernate.initialize(video.getRentalSet());
-        }
-        return video;
-    }
 
     @Override
     public Integer convertToKeyType(String key) {

@@ -4,7 +4,6 @@ import com.bsk.dao.AbstractDao;
 import com.bsk.dao.interfaces.EmployeeDao;
 import com.bsk.entities.Employee;
 import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,14 +13,6 @@ import java.util.List;
  */
 @Repository("employeeDao")
 public class EmployeeDaoImplementation extends AbstractDao<Integer, Employee> implements EmployeeDao {
-    @Override
-    public Employee findByID(Integer id) {
-        Employee employee = getByKey(id);
-        if (employee != null) {
-            Hibernate.initialize(employee.getTransactions());
-        }
-        return employee;
-    }
 
     @Override
     public Integer convertToKeyType(String key) {

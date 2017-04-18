@@ -1,10 +1,10 @@
 package com.bsk.entities;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 /**
  * Created by Mitrius on 14.03.17.
@@ -12,7 +12,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Employees")
-@Data
+@Getter
+@Setter
 public class Employee implements Serializable, EntityBSKClass {
     @Id
     @GeneratedValue
@@ -24,9 +25,6 @@ public class Employee implements Serializable, EntityBSKClass {
     private String surname;
     @Column(name = "position")
     private String position;
-
-    @OneToMany(mappedBy = "employee")
-    private Set<ShopTransaction> transactions;
 
     public String getHeader() {
         return "id,name,surname,position";

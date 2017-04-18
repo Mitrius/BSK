@@ -1,5 +1,6 @@
 package com.bsk.controllers.ViewControllers;
 
+import com.bsk.entities.EntityBSKClass;
 import com.bsk.services.TableDataService;
 import com.bsk.services.TableInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,16 +26,15 @@ public class DataViewController {
     private TableDataService tableDataService;
 
     @RequestMapping(value = "/getSpecificTable", method = RequestMethod.GET)
-    public ModelAndView getSpecificTable(@RequestParam String tableName) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
+    public ModelAndView getSpecificTable(@RequestParam String tableName) throws ReflectiveOperationException {
         String className = tableName.substring(0, tableName.length() - 1);
 
         ModelAndView modelAndView = new ModelAndView("tableDataView");
         List<Object> entities = tableDataService.getSpecificTable(className);
 
         Class<?> cls = Class.forName("com.bsk.entities." + className);
-        Method met = cls.getDeclaredMethod("getHeader", (Class<?>[]) null);
         Object ret = cls.newInstance();
-        String classHeader = (String) met.invoke(ret);
+        String classHeader = ((EntityBSKClass) ret).getHeader();
 
         List<String> entitiesString = entities.stream()
                 .map(c -> c.toString())

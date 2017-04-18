@@ -1,16 +1,17 @@
 package com.bsk.entities;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 /**
  * Created by Mitrius on 02.04.17.
  */
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "ShopTransactions")
 public class ShopTransaction implements Serializable, EntityBSKClass {
     @Id
@@ -26,19 +27,15 @@ public class ShopTransaction implements Serializable, EntityBSKClass {
     @JoinColumn(name = "customer")
     private Customer customer;
 
-    @OneToMany(mappedBy = "transaction")
-    private Set<Rental> rentals;
-
     public String getHeader() {
         return "id,employee,customer";
     }
-
     @Override
     public Serializable getKey() {
         return id;
     }
 
     public String toString() {
-        return id + "," + employee + "," + customer;
+        return id + "," + employee.getId() + "," + customer.getId();
     }
 }

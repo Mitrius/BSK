@@ -15,11 +15,6 @@ import java.util.List;
 public class TableClassLevelDaoImplementation extends AbstractDao<Integer, TableClassLevel>
         implements TableClassLevelDao {
     @Override
-    public TableClassLevel findByID(Integer id) {
-        return getByKey(id);
-    }
-
-    @Override
     public void save(TableClassLevel tableClassLevel) {
         persist(tableClassLevel);
     }

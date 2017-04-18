@@ -14,10 +14,6 @@ import java.util.List;
 @Repository("rentalDao")
 public class RentalDaoImplementation extends AbstractDao<Integer, Rental> implements RentalDao {
     @Override
-    public Rental findByID(Integer id) {
-        return getByKey(id);
-    }
-    @Override
     public Integer convertToKeyType(String key) {
         return Integer.parseInt(key);
     }

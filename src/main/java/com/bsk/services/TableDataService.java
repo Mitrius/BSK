@@ -1,6 +1,7 @@
 package com.bsk.services;
 
 import com.bsk.dao.AbstractDao;
+import com.bsk.entities.Video;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,16 +32,17 @@ public class TableDataService {
         return null;
     }
 
-    public List<Object> getSpecificTable(String tableName) {
-        return getProperDaoInstance(tableName).findAll();
+    public List<Object> getSpecificTable(String entityType) {
+        return getProperDaoInstance(entityType).findAll();
     }
 
-    public Object getVerySpecificTable(String tableName, Object id) {
-        return getProperDaoInstance(tableName).getByKey((Serializable) id);
+    public Object getEntry(String entityType, String id) {
+        AbstractDao properDao = getProperDaoInstance(entityType);
+        return properDao.findByID(properDao.convertToKeyType(id));
     }
 
-    public void deleteEntity(String key, String tableName){
-        AbstractDao properDao = getProperDaoInstance(tableName);
+    public void deleteEntity(String key, String entityType) {
+        AbstractDao properDao = getProperDaoInstance(entityType);
         Serializable keyProper = properDao.convertToKeyType(key);
         Object obj = properDao.findByID(keyProper);
         if (obj != null)
@@ -52,4 +54,13 @@ public class TableDataService {
         getProperDaoInstance(entityName).persist(object);
     }
 
+    public void editVideo(Video newObject, int key){
+        AbstractDao properDao = getProperDaoInstance(Video.class.getSimpleName());
+        Video obj = (Video) properDao.findByID(key);
+        obj.setId(newObject.getId());
+        obj.setPrice(newObject.getPrice());
+        obj.setStatus(newObject.getStatus());
+        obj.setTitle(newObject.getTitle());
+        properDao.update(obj);
+    }
 }

@@ -33,13 +33,8 @@ public class AbstractDao<PK extends Serializable, T> {
         return (List<T>) createEntityCriteria().list();
     }
 
-    public T getByKey(PK key) {
-
-        return (T) getCurrentSession().get(persistentClass, key);
-    }
-
     public Serializable convertToKeyType(String key) {
-        return null;
+        return Serializable.class;
     }
     public void persist(T entity) {
         getCurrentSession().persist(entity);

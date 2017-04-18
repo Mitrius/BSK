@@ -15,28 +15,31 @@
 </div>
 <div id="magicButton">
     <form action="<c:url value="/getPossibleTables"/>" id="getTablesButt">
-        <c:otherwise>
-            <input type="submit" value="Wyświetl tabele">
-        </c:otherwise>
+        <input type="submit" value="Wyświetl tabele">
     </form>
 </div>
 <div id="tables">
     <div id="tableEditDiv">
-        <form>
+        <form action="/editEntity/${type}" method="post">
             <table>
                 <tr>
-                    <c:forTokens var="headerCell" items="${entityHeader}" delims=",">
+                    <c:forEach items="${entityHeader}" var="headerCell" varStatus="status">
                         <td>
                             <c:out value="${headerCell}"/>
                         </td>
-                    </c:forTokens>
+                    </c:forEach>
+                </tr>
+                <tr>
                     <c:forEach items="${entityHeader}" var="headerCell" varStatus="status">
                         <td>
-                            <input type="text" value="${entity[status.index]} name="${headerCell}"/>
+                            <input type="text" value="${entity[status.index]}" name="${headerCell}"/>
                         </td>
                     </c:forEach>
                 </tr>
             </table>
+            <input type="hidden" name="key" value="${entity[0]}"/>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="submit" value="Update">
         </form>
 
     </div>

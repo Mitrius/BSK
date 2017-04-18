@@ -14,11 +14,6 @@ import java.util.List;
 @Repository("userDao")
 public class UserDaoImplementation extends AbstractDao<String, User> implements UserDao {
     @Override
-    public User findByID(String id) {
-        return getByKey(id);
-    }
-
-    @Override
     public void save(User user) {
         persist(user);
     }

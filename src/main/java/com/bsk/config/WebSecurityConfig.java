@@ -30,7 +30,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder())
                 .usersByUsernameQuery("select username,password,enabled from Users where username=?")
                 .authoritiesByUsernameQuery("select username,role from Users where username=?");
-        //authenticationManagerBuilder.inMemoryAuthentication().withUser("Mitrius").password("pass").roles("USER");
     }
 
     @Bean

@@ -1,15 +1,16 @@
 package com.bsk.entities;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 /**
  * Created by Mitrius on 14.03.17.
  */
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "Videos")
 public class Video implements Serializable, EntityBSKClass {
@@ -23,9 +24,6 @@ public class Video implements Serializable, EntityBSKClass {
     private Double price;
     @Column(name = "status")
     private String status;
-
-    @OneToMany(mappedBy = "video", fetch = FetchType.LAZY)
-    private Set<Rental> rentalSet;
 
     public String getHeader() {
         return "id,title,price,status";

@@ -1,6 +1,7 @@
 package com.bsk.entities;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +13,8 @@ import java.io.Serializable;
  * Created by Mitrius on 08.04.17.
  */
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "TableClassLevels")
 public class TableClassLevel implements Serializable, EntityBSKClass {
     @Id

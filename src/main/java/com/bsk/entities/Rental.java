@@ -1,6 +1,7 @@
 package com.bsk.entities;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,10 +12,12 @@ import java.sql.Date;
  */
 @Entity
 @Table(name = "Rentals")
-@Data
+@Getter
+@Setter
 public class Rental implements Serializable, EntityBSKClass {
     @Id
     @Column(name = "id")
+    @GeneratedValue
     private Integer id;
     @Column(name = "cost")
     private double cost;
@@ -27,11 +30,11 @@ public class Rental implements Serializable, EntityBSKClass {
     @JoinColumn(name = "transaction")
     private ShopTransaction transaction;
     @ManyToOne
-    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "video")
     private Video video;
 
     public String getHeader() {
-        return "id,cost,rentalDate,tillDate,transaction,video";
+        return "id,cost,rentalDate,tillDate,transactionID,videoID";
     }
 
     @Override
@@ -40,6 +43,6 @@ public class Rental implements Serializable, EntityBSKClass {
     }
 
     public String toString() {
-        return id + "," + cost + "," + rentalDate + "," + tillDate + "," + transaction.getId() + "," + video.getId();
+        return id + "," + cost + "," + rentalDate.toString() + "," + tillDate.toString() + "," + transaction.getId() + "," + video.getId();
     }
 }

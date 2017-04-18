@@ -4,7 +4,6 @@ import com.bsk.dao.AbstractDao;
 import com.bsk.dao.interfaces.ShopTransactionDao;
 import com.bsk.entities.ShopTransaction;
 import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,14 +14,6 @@ import java.util.List;
 @Repository("shopTransactionDao")
 public class ShopTransactionDaoImplementation extends AbstractDao<Integer, ShopTransaction>
         implements ShopTransactionDao {
-    @Override
-    public ShopTransaction findByID(Integer id) {
-        ShopTransaction transaction = getByKey(id);
-        if (transaction != null) {
-            Hibernate.initialize(transaction.getRentals());
-        }
-        return transaction;
-    }
 
     @Override
     public Integer convertToKeyType(String key) {
