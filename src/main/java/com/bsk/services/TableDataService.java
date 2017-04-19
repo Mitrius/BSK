@@ -1,7 +1,7 @@
 package com.bsk.services;
 
 import com.bsk.dao.AbstractDao;
-import com.bsk.entities.Video;
+import com.bsk.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,13 +56,77 @@ public class TableDataService {
         getProperDaoInstance(entityName).persist(object);
     }
 
-    public void editVideo(Video newObject, int key){
+    public void editVideo(Video newObject, String key){
         AbstractDao properDao = getProperDaoInstance(Video.class.getSimpleName());
-        Video obj = (Video) properDao.findByID(key);
-        obj.setId(newObject.getId());
+        Video obj = (Video) properDao.findByID(properDao.convertToKeyType(key));
+        if (obj == null) return;
+        //obj.setId(newObject.getId());
         obj.setPrice(newObject.getPrice());
         obj.setStatus(newObject.getStatus());
         obj.setTitle(newObject.getTitle());
+        properDao.update(obj);
+    }
+
+    public void editUser(User newObject, String key){
+        AbstractDao properDao = getProperDaoInstance(User.class.getSimpleName());
+        User obj = (User) properDao.findByID(properDao.convertToKeyType(key));
+        if (obj == null) return;
+        obj.setRole(newObject.getRole());
+        obj.setClearanceLevel(newObject.getClearanceLevel());
+        //obj.setPassword(newObject.getPassword());
+        properDao.update(obj);
+    }
+
+    public void editTableClassLevel(TableClassLevel newObject, String key){
+        AbstractDao properDao = getProperDaoInstance(TableClassLevel.class.getSimpleName());
+        TableClassLevel obj = (TableClassLevel) properDao.findByID(properDao.convertToKeyType(key));
+        if (obj == null) return;
+        obj.setClassLevel(newObject.getClassLevel());
+        //obj.setTableName(newObject.getTableName());
+        properDao.update(obj);
+    }
+
+    public void editShopTransaction(ShopTransaction newObject, String key){
+        AbstractDao properDao = getProperDaoInstance(ShopTransaction.class.getSimpleName());
+        ShopTransaction obj = (ShopTransaction) properDao.findByID(properDao.convertToKeyType(key));
+        if (obj == null) return;
+        obj.setCustomer(newObject.getCustomer());
+        obj.setEmployee(newObject.getEmployee());
+        //obj.setId(newObject.getId());
+        properDao.update(obj);
+    }
+
+    public void editRental(Rental newObject, String key){
+        AbstractDao properDao = getProperDaoInstance(Rental.class.getSimpleName());
+        Rental obj = (Rental) properDao.findByID(properDao.convertToKeyType(key));
+        if (obj == null) return;
+        obj.setCost(newObject.getCost());
+        obj.setRentalDate(newObject.getRentalDate());
+        obj.setTillDate(newObject.getTillDate());
+        obj.setVideo(newObject.getVideo());
+        obj.setTransaction(newObject.getTransaction());
+        //obj.setId(newObject.getId());
+        properDao.update(obj);
+    }
+
+    public void editEmployee(Employee newObject, String key){
+        AbstractDao properDao = getProperDaoInstance(Employee.class.getSimpleName());
+        Employee obj = (Employee) properDao.findByID(properDao.convertToKeyType(key));
+        if (obj == null) return;
+        obj.setName(newObject.getName());
+        obj.setPosition(newObject.getPosition());
+        obj.setSurname(newObject.getSurname());
+        //obj.setId(newObject.getId());
+        properDao.update(obj);
+    }
+
+    public void editCustomer(Customer newObject, String key){
+        AbstractDao properDao = getProperDaoInstance(Customer.class.getSimpleName());
+        Customer obj = (Customer) properDao.findByID(properDao.convertToKeyType(key));
+        if (obj == null) return;
+        obj.setName(newObject.getName());
+        obj.setSurname(newObject.getSurname());
+        //obj.setId(newObject.getId());
         properDao.update(obj);
     }
 }

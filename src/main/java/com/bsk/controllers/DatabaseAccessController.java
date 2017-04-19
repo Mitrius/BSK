@@ -28,10 +28,52 @@ public class DatabaseAccessController {
         return "tableDataView";
     }
 
+    @RequestMapping(value = "/editEntity/Customer", method = RequestMethod.POST)
+    public String editEntity(@ModelAttribute Customer customer,
+                             @RequestParam(value="key") String key) {
+        tableDataService.editCustomer(customer, key);
+        return "tableDataView";
+    }
+
+    @RequestMapping(value = "/editEntity/Employee", method = RequestMethod.POST)
+    public String editEntity(@ModelAttribute Employee employee,
+                             @RequestParam(value="key") String key) {
+        tableDataService.editEmployee(employee, key);
+        return "tableDataView";
+    }
+
+    @RequestMapping(value = "/editEntity/Rental", method = RequestMethod.POST)
+    public String editEntity(@ModelAttribute Rental rental,
+                             @RequestParam(value="key") String key) {
+        tableDataService.editRental(rental, key);
+        return "tableDataView";
+    }
+
+    @RequestMapping(value = "/editEntity/ShopTransaction", method = RequestMethod.POST)
+    public String editEntity(@ModelAttribute ShopTransaction st,
+                             @RequestParam(value="key") String key) {
+        tableDataService.editShopTransaction(st, key);
+        return "tableDataView";
+    }
+
+    @RequestMapping(value = "/editEntity/TableClassLevel", method = RequestMethod.POST)
+    public String editEntity(@ModelAttribute TableClassLevel tcl,
+                             @RequestParam(value="key") String key) {
+        tableDataService.editTableClassLevel(tcl, key);
+        return "tableDataView";
+    }
+
+    @RequestMapping(value = "/editEntity/User", method = RequestMethod.POST)
+    public String editEntity(@ModelAttribute User user,
+                             @RequestParam(value="key") String key) {
+        tableDataService.editUser(user, key);
+        return "tableDataView";
+    }
+
     @RequestMapping(value = "/editEntity/Video", method = RequestMethod.POST)
     public String editEntity(@ModelAttribute Video video,
                              @RequestParam(value="key") String key) {
-        tableDataService.editVideo(video, Integer.parseInt(key));
+        tableDataService.editVideo(video, key);
         return "tableDataView";
     }
 
