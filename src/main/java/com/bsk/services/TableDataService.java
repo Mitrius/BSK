@@ -49,6 +49,8 @@ public class TableDataService {
             properDao.delete(obj);
     }
 
+
+
     public void insertValue(Object object) {
         String entityName = object.getClass().getSimpleName();
         getProperDaoInstance(entityName).persist(object);
