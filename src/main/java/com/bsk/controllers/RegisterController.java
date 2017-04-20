@@ -17,7 +17,7 @@ public class RegisterController {
     @Autowired
     private RegisterService registerService;
 
-    @RequestMapping(value = {"/register"})
+    @RequestMapping(value = {"/register", "/createNewClass/User"})
     public String index() {
         return "register";
     }
