@@ -20,8 +20,8 @@ public class TableClassLevelDaoImplementation extends AbstractDao<Integer, Table
     }
 
     @Override
-    public Integer convertToKeyType(String key) {
-        return Integer.parseInt(key);
+    public String convertToKeyType(String key) {
+        return key;
     }
     @Override
     public List<TableClassLevel> findAll() {

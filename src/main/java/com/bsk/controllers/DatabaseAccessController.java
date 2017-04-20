@@ -84,6 +84,12 @@ public class DatabaseAccessController {
         return "tableDataView";
     }
 
+    @RequestMapping(value = "/createNewClass/TableClassLevel", method = RequestMethod.POST)
+    public String createNewEntity(@ModelAttribute TableClassLevel tableClassLevel) {
+        tableDataService.insertValue(tableClassLevel);
+        return "tableDataView";
+    }
+
     @RequestMapping(value = "/createNewClass/Employee", method = RequestMethod.POST)
     public String createNewEntity(@ModelAttribute Employee employee) {
         employee.setId(null);
