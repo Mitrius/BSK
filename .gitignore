@@ -1,10 +1,7 @@
-*.class
-
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 
@@ -14,8 +11,7 @@ hs_err_pid*
 .idea/artifacts/
 .idea/compiler.xml
 .idea/copyright/
-.idea/libraries/Spring_4_3_7_RELEASE.xml
-.idea/libraries/Spring_MVC_4_3_7_RELEASE.xml
+.idea/libraries/
 .idea/misc.xml
 .idea/modules.xml
 .idea/vcs.xml
