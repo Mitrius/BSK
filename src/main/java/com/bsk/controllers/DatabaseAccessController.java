@@ -1,7 +1,7 @@
 package com.bsk.controllers;
 
 import com.bsk.entities.*;
-import com.bsk.services.TableDataService;
+import com.bsk.services.UserTableAccessInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -19,81 +19,81 @@ import java.util.Date;
 @Controller
 public class DatabaseAccessController {
     @Autowired
-    private TableDataService tableDataService;
+    private UserTableAccessInfoService userTableAccessInfoService;
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String deleteEntity(@RequestParam(value="key", required=true) String key,
                                @RequestParam(value="tableName", required=true) String tableName){
-        tableDataService.deleteEntity(key, tableName);
+        userTableAccessInfoService.deleteEntity(key, tableName);
         return "tableDataView";
     }
 
     @RequestMapping(value = "/editEntity/Customer", method = RequestMethod.POST)
     public String editEntity(@ModelAttribute Customer customer,
                              @RequestParam(value="key") String key) {
-        tableDataService.editCustomer(customer, key);
+        userTableAccessInfoService.editCustomer(customer, key);
         return "tableDataView";
     }
 
     @RequestMapping(value = "/editEntity/Employee", method = RequestMethod.POST)
     public String editEntity(@ModelAttribute Employee employee,
                              @RequestParam(value="key") String key) {
-        tableDataService.editEmployee(employee, key);
+        userTableAccessInfoService.editEmployee(employee, key);
         return "tableDataView";
     }
 
     @RequestMapping(value = "/editEntity/Rental", method = RequestMethod.POST)
     public String editEntity(@ModelAttribute Rental rental,
                              @RequestParam(value="key") String key) {
-        tableDataService.editRental(rental, key);
+        userTableAccessInfoService.editRental(rental, key);
         return "tableDataView";
     }
 
     @RequestMapping(value = "/editEntity/ShopTransaction", method = RequestMethod.POST)
     public String editEntity(@ModelAttribute ShopTransaction st,
                              @RequestParam(value="key") String key) {
-        tableDataService.editShopTransaction(st, key);
+        userTableAccessInfoService.editShopTransaction(st, key);
         return "tableDataView";
     }
 
     @RequestMapping(value = "/editEntity/TableClassLevel", method = RequestMethod.POST)
     public String editEntity(@ModelAttribute TableClassLevel tcl,
                              @RequestParam(value="key") String key) {
-        tableDataService.editTableClassLevel(tcl, key);
+        userTableAccessInfoService.editTableClassLevel(tcl, key);
         return "tableDataView";
     }
 
     @RequestMapping(value = "/editEntity/User", method = RequestMethod.POST)
     public String editEntity(@ModelAttribute User user,
                              @RequestParam(value="key") String key) {
-        tableDataService.editUser(user, key);
+        userTableAccessInfoService.editUser(user, key);
         return "tableDataView";
     }
 
     @RequestMapping(value = "/editEntity/Video", method = RequestMethod.POST)
     public String editEntity(@ModelAttribute Video video,
                              @RequestParam(value="key") String key) {
-        tableDataService.editVideo(video, key);
+        userTableAccessInfoService.editVideo(video, key);
         return "tableDataView";
     }
 
     @RequestMapping(value = "/createNewClass/Customer", method = RequestMethod.POST)
     public String createNewEntity(@ModelAttribute Customer cust) {
         cust.setId(null);
-        tableDataService.insertValue(cust);
+        userTableAccessInfoService.insertValue(cust);
         return "tableDataView";
     }
 
     @RequestMapping(value = "/createNewClass/TableClassLevel", method = RequestMethod.POST)
     public String createNewEntity(@ModelAttribute TableClassLevel tableClassLevel) {
-        tableDataService.insertValue(tableClassLevel);
+        userTableAccessInfoService.insertValue(tableClassLevel);
         return "tableDataView";
     }
 
     @RequestMapping(value = "/createNewClass/Employee", method = RequestMethod.POST)
     public String createNewEntity(@ModelAttribute Employee employee) {
         employee.setId(null);
-        tableDataService.insertValue(employee);
+        userTableAccessInfoService.insertValue(employee);
         return "tableDataView";
     }
 
@@ -103,8 +103,8 @@ public class DatabaseAccessController {
                                   @RequestParam(name = "tillDate") @DateTimeFormat(pattern = "dd.MM.yy") Date tillDate,
                                   @RequestParam(name = "transactionID") Integer transactId,
                                   @RequestParam(name = "videoID") Integer videoID) {
-        Video video = (Video) tableDataService.getEntry("Video", String.valueOf(videoID));
-        ShopTransaction transaction = (ShopTransaction) tableDataService.getEntry("ShopTransaction", String.valueOf(transactId));
+        Video video = (Video) userTableAccessInfoService.getEntry("Video", String.valueOf(videoID));
+        ShopTransaction transaction = (ShopTransaction) userTableAccessInfoService.getEntry("ShopTransaction", String.valueOf(transactId));
         if (video != null && transaction != null) {
             Rental rental = new Rental();
             rental.setCost(cost);
@@ -113,7 +113,7 @@ public class DatabaseAccessController {
             rental.setVideo(video);
             rental.setTransaction(transaction);
 
-            tableDataService.insertValue(rental);
+            userTableAccessInfoService.insertValue(rental);
         }
         return "tableDataView";
     }
@@ -122,14 +122,14 @@ public class DatabaseAccessController {
     public String createNewEntity(@RequestParam(name = "employee") Integer employee,
                                   @RequestParam(name = "customer") Integer customer) {
         ShopTransaction transaction = new ShopTransaction();
-        Employee employee1 = (Employee) tableDataService.getEntry("Employee", String.valueOf(employee));
-        Customer customer1 = (Customer) tableDataService.getEntry("Customer", String.valueOf(customer));
+        Employee employee1 = (Employee) userTableAccessInfoService.getEntry("Employee", String.valueOf(employee));
+        Customer customer1 = (Customer) userTableAccessInfoService.getEntry("Customer", String.valueOf(customer));
         if (employee1 != null && customer1 != null) {
 
             transaction.setCustomer(customer1);
             transaction.setEmployee(employee1);
 
-            tableDataService.insertValue(transaction);
+            userTableAccessInfoService.insertValue(transaction);
         }
         return "tableDataView";
     }
@@ -137,7 +137,7 @@ public class DatabaseAccessController {
     @RequestMapping(value = "/createNewClass/Video", method = RequestMethod.POST)
     public String createNewEntity(@ModelAttribute Video object) {
         object.setId(null);
-        tableDataService.insertValue(object);
+        userTableAccessInfoService.insertValue(object);
         return "tableDataView";
     }
 

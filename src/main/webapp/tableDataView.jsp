@@ -14,7 +14,7 @@
     <a href="<c:url value="/register"/>">Rejestracja</a>
 </div>
 <div id="magicButton">
-    <form action="<c:url value="/getPossibleTables"/>" id="getTablesButt">
+    <form action="<c:url value="/getTableNames"/>" id="getTablesButt">
         <c:choose>
             <c:when test="${not empty possibleTables}">
                 <input type="submit" value="odśwież tabele"/>

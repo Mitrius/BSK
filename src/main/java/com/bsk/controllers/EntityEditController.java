@@ -1,6 +1,6 @@
 package com.bsk.controllers;
 
-import com.bsk.services.TableDataService;
+import com.bsk.services.UserTableAccessInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,12 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class EntityEditController {
     @Autowired
-    TableDataService tableDataService;
+    UserTableAccessInfoService userTableAccessInfoService;
 
     @RequestMapping(value = "/editEntity")
     public ModelAndView editEntity(@RequestParam String type, @RequestParam String id, @RequestParam String entityHeader) {
         ModelAndView modelAndView = new ModelAndView("editView");
-        String entity = tableDataService.getEntry(type, id).toString();
+        String entity = userTableAccessInfoService.getEntry(type, id).toString();
 
         modelAndView.getModelMap().addAttribute("type", type);
         modelAndView.getModelMap().addAttribute("entityHeader", entityHeader.split(","));

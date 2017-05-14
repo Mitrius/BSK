@@ -22,8 +22,7 @@ public class AbstractDao<PK extends Serializable, T> {
     }
 
     public Session getCurrentSession() {
-        Session temp = sessionFactory.getCurrentSession();
-        return temp;
+        return sessionFactory.getCurrentSession();
     }
 
     public T findByID(PK id) {
@@ -38,6 +37,7 @@ public class AbstractDao<PK extends Serializable, T> {
     }
     public void persist(T entity) {
         getCurrentSession().persist(entity);
+
     }
 
     public void update(T entity) {

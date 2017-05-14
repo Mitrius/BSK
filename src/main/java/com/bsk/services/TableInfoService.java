@@ -9,11 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
-/**
- * Created by Mitrius on 17.04.17.
- */
 @Service("TableInfo")
 @Transactional
 public class TableInfoService {
@@ -23,14 +21,26 @@ public class TableInfoService {
     @Autowired
     TableClassLevelDao tableClassLevelDao;
 
-    public List<String> getUserPossibleTables(String username) {
+    public Boolean isReadable(String username, String tableName) {
         List<TableClassLevel> filteredTables = tableClassLevelDao
                 .findAll()
                 .stream()
                 .filter(c -> c.getClassLevel() <= dao.findByID(username).getClearanceLevel())
                 .collect(Collectors.toList());
+        return filteredTables.stream().anyMatch(c -> Objects.equals(c.getTableName(), tableName));
+    }
 
+    public Boolean isWritable(String username, String tableName) {
+        List<TableClassLevel> filteredTables = tableClassLevelDao
+                .findAll()
+                .stream()
+                .filter(c -> c.getClassLevel() >= dao.findByID(username).getClearanceLevel())
+                .collect(Collectors.toList());
+        return filteredTables.stream().anyMatch(c -> Objects.equals(c.getTableName(), tableName));
+    }
+
+    public List<String> listAllTables() {
+        List<TableClassLevel> filteredTables = tableClassLevelDao.findAll();
         return new ArrayList<>(filteredTables.stream().map(TableClassLevel::getTableName).collect(Collectors.toList()));
-
     }
 }

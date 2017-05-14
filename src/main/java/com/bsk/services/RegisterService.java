@@ -10,9 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by Krystian on 14.04.2017.
- */
 @Service("RegisterService")
 @Transactional
 public class RegisterService {

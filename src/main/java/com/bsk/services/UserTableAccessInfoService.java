@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  */
 @Service("TableDataService")
 @Transactional
-public class TableDataService {
+public class UserTableAccessInfoService {
 
     @Autowired
     List<AbstractDao> daos;
@@ -48,8 +48,6 @@ public class TableDataService {
         if (obj != null)
             properDao.delete(obj);
     }
-
-
 
     public void insertValue(Object object) {
         String entityName = object.getClass().getSimpleName();
