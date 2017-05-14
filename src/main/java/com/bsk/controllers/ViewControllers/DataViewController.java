@@ -40,6 +40,8 @@ public class DataViewController {
                     .collect(Collectors.toList());
             modelAndView.getModelMap().addAttribute("table", entitiesString);
         }
+
+
         modelAndView.getModelMap().addAttribute("type", className);
         modelAndView.getModelMap().addAttribute("entityHeader", classHeader);
 
