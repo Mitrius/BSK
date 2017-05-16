@@ -6,9 +6,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by Mitrius on 14.03.17.
- */
 @Entity
 @Setter
 @Getter

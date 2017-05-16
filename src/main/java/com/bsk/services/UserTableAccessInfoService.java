@@ -2,6 +2,7 @@ package com.bsk.services;
 
 import com.bsk.dao.AbstractDao;
 import com.bsk.entities.*;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -68,10 +69,9 @@ public class UserTableAccessInfoService {
     public void editUser(User newObject, String key){
         AbstractDao properDao = getProperDaoInstance(User.class.getSimpleName());
         User obj = (User) properDao.findByID(properDao.convertToKeyType(key));
-        if (obj == null) return;
-        obj.setRole(newObject.getRole());
-        obj.setClearanceLevel(newObject.getClearanceLevel());
-        //obj.setPassword(newObject.getPassword());
+        if (obj == null) return; //Nie powinno wystąpić, transakcja
+        BeanUtils.copyProperties(newObject, obj);
+
         properDao.update(obj);
     }
 

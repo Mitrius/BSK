@@ -8,32 +8,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service("RegisterService")
 @Transactional
 public class RegisterService {
     @Autowired
     UserDao userDao;
 
-    public User getByID(String id) {
-        return userDao.findByID(id);
-    }
-
-    public void registerUser(String username, String password) {
+    public void registerUser(User user) {
         PasswordEncoder pe = new BCryptPasswordEncoder();
-        String hash = pe.encode(password);
-        User user = new User();
-        user.setUsername(username);
+        String hash = pe.encode(user.getPassword());
         user.setPassword(hash);
-        user.setClearanceLevel(4);
-        user.setRole("USER");
-        user.setEnabled(true);
+        user.setRole("USER"); //Wykluczamy tworzenie adminów (role narzuca Spring Security)
         userDao.save(user);
-    }
-
-    public List<User> getAllUsers() {
-        return userDao.findAll();
     }
 
 }
