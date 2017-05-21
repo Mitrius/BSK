@@ -51,6 +51,7 @@ public class EntityCreateController {
         if (video != null && transaction != null) {
             Rental rental = new Rental();
             rental.setCost(cost);
+            rental.setId(null);
             rental.setRentalDate(new java.sql.Date(rentalDate.getTime()));
             rental.setTillDate(new java.sql.Date(tillDate.getTime()));
             rental.setVideo(video);
@@ -68,7 +69,7 @@ public class EntityCreateController {
         Employee employee1 = (Employee) userTableAccessInfoService.getEntry("Employee", String.valueOf(employee));
         Customer customer1 = (Customer) userTableAccessInfoService.getEntry("Customer", String.valueOf(customer));
         if (employee1 != null && customer1 != null) {
-
+            transaction.setId(null);
             transaction.setCustomer(customer1);
             transaction.setEmployee(employee1);
 
@@ -86,7 +87,9 @@ public class EntityCreateController {
 
     @RequestMapping(value = "/createNewClass/User", method = RequestMethod.POST)
     public String createNewEntity(@ModelAttribute User user) {
-        registerService.registerUser(user);
+        if ((user.getClearanceLevel() <= 3) && (user.getClearanceLevel() >= 0)) {
+            registerService.registerUser(user);
+        }
         return "redirect:/tableView";
     }
 }

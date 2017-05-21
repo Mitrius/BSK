@@ -11,7 +11,6 @@
     <form action="<c:url value="/logout"/>" id="submitButt">
         <input type="submit" value="wyloguj">
     </form>
-    <a href="<c:url value="/register"/>">Rejestracja</a>
 </div>
 <div id="magicButton">
     <form action="<c:url value="/getTableNames"/>" id="getTablesButt">

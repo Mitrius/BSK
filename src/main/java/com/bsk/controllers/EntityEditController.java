@@ -69,7 +69,9 @@ public class EntityEditController {
     @RequestMapping(value = "/editEntity/User", method = RequestMethod.POST)
     public String editEntity(@ModelAttribute User user,
                              @RequestParam(value = "key") String key) {
-        userTableAccessInfoService.editUser(user, key);
+        if ((user.getClearanceLevel() <= 3) && (user.getClearanceLevel() >= 0)) {
+            userTableAccessInfoService.editUser(user, key);
+        }
         return "tableDataView";
     }
 
