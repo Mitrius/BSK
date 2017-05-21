@@ -55,7 +55,7 @@ public class DatabaseAccessController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/getTableNames", method = RequestMethod.GET)
+    @RequestMapping(value = {"/getTableNames", "/tableView"}, method = RequestMethod.GET)
     public ModelAndView getTableNames() {
         List<String> tables = tableInfoService.listAllTables();
         ModelAndView modelAndView = new ModelAndView("tableDataView");

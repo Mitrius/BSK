@@ -48,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
-                .defaultSuccessUrl("/tableView")
+                .defaultSuccessUrl("/getTableNames")
                 .and()
                 .httpBasic()
                 .and()
