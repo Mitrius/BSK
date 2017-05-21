@@ -3,6 +3,7 @@ package com.bsk.controllers;
 import com.bsk.entities.EntityBSKClass;
 import com.bsk.services.TableInfoService;
 import com.bsk.services.UserTableAccessInfoService;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,8 +36,7 @@ public class DatabaseAccessController {
 
         ModelAndView modelAndView = new ModelAndView("tableDataView");
         List<Object> entities = userTableAccessInfoService.getSpecificTable(className);
-
-        Class<?> cls = Class.forName("com.bsk.entities." + className);
+        val cls = Class.forName("com.bsk.entities." + className);
         Object ret = cls.newInstance();
         String classHeader = ((EntityBSKClass) ret).getHeader();
 
