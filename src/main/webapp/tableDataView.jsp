@@ -88,6 +88,8 @@
                             </td>
                         </c:forTokens>
                         <td>
+                            <c:choose>
+                            <c:when test="${editPerm}">
                             <input form="edit${tableRow.split(";")[0]}" type="hidden" name="id"
                                    value="${tableRow.split(";")[0]}"/>
                             <input form="edit${tableRow.split(";")[0]}" type="hidden" name="type" value="${type}"/>
@@ -106,6 +108,12 @@
                             <button class="btn btn-default" form="delete${tableRow.split(";")[0]}" type="submit">
                                 Delete
                             </button>
+                            </c:when>
+                            <c:otherwise>
+                                <button class="btn btn-default disabled">Edit</button>
+                                <button class="btn btn-default disabled">Delete</button>
+                            </c:otherwise>
+                            </c:choose>
                         </td>
                     </tr>
                 </c:forEach>
@@ -120,7 +128,14 @@
                         </c:forTokens>
                         <td>
                             <input form="create" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                            <button form="create" class="btn btn-default" type="submit">Add</button>
+                            <c:choose>
+                                <c:when test="${editPerm}">
+                                    <button form="create" class="btn btn-default" type="submit">Add</button>
+                                </c:when>
+                                <c:otherwise>
+                                    <button class="btn btn-default disabled" type="button">Add</button>
+                                </c:otherwise>
+                            </c:choose>
                         </td>
                     </tr>
                 </form>

@@ -25,9 +25,11 @@ public class DatabaseAccessController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String deleteEntity(@RequestParam(value = "key") String key,
-                               @RequestParam(value = "tableName") String tableName) {
-        userTableAccessInfoService.deleteEntity(key, tableName);
-        return "tableDataView";
+                               @RequestParam(value = "tableName") String tableName, Principal principal) {
+        if (tableInfoService.isWritable(principal.getName(), tableName + "s")){
+            userTableAccessInfoService.deleteEntity(key, tableName);
+        }
+        return "redirect:/getSpecificTable?tableName=" + tableName + "s";
     }
 
     @RequestMapping(value = "/getSpecificTable", method = RequestMethod.GET)
@@ -51,6 +53,7 @@ public class DatabaseAccessController {
 
         modelAndView.getModelMap().addAttribute("type", className);
         modelAndView.getModelMap().addAttribute("entityHeader", classHeader);
+        modelAndView.getModelMap().addAttribute("editPerm", tableInfoService.isWritable(principal.getName(), tableName));
 
         return modelAndView;
     }

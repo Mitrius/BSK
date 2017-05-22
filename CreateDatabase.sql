@@ -28,7 +28,7 @@ CREATE TABLE `TableClassLevels` (
   CHARACTER SET utf8
   COLLATE utf8_polish_ci;
 
-CREATE TABLE `Transactions` (
+CREATE TABLE `ShopTransactions` (
   `id`       INTEGER PRIMARY KEY AUTO_INCREMENT,
   `employee` INTEGER NOT NULL,
   `customer` INTEGER NOT NULL
@@ -37,15 +37,15 @@ CREATE TABLE `Transactions` (
   COLLATE utf8_polish_ci;
 
 CREATE INDEX `idx_transactions__customer`
-  ON `Transactions` (`customer`);
+  ON `ShopTransactions` (`customer`);
 
 CREATE INDEX `idx_transactions__employee`
-  ON `Transactions` (`employee`);
+  ON `ShopTransactions` (`employee`);
 
-ALTER TABLE `Transactions`
+ALTER TABLE `ShopTransactions`
   ADD CONSTRAINT `fk_transactions__customer` FOREIGN KEY (`customer`) REFERENCES `Customers` (`id`);
 
-ALTER TABLE `Transactions`
+ALTER TABLE `ShopTransactions`
   ADD CONSTRAINT `fk_transactions__employee` FOREIGN KEY (`employee`) REFERENCES `Employees` (`id`);
 
 CREATE TABLE `Users` (
@@ -90,7 +90,7 @@ CREATE INDEX `idx_rentals__video`
   ON `Rentals` (`video`);
 
 ALTER TABLE `Rentals`
-  ADD CONSTRAINT `fk_rentals__transaction` FOREIGN KEY (`transaction`) REFERENCES `Transactions` (`id`);
+  ADD CONSTRAINT `fk_rentals__transaction` FOREIGN KEY (`transaction`) REFERENCES `ShopTransactions` (`id`);
 
 ALTER TABLE `Rentals`
   ADD CONSTRAINT `fk_rentals__video` FOREIGN KEY (`video`) REFERENCES `Videos` (`id`)

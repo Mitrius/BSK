@@ -29,21 +29,21 @@ public class EntityCreateController {
         if (tableInfoService.isWritable(principal.getName(), "Customers")) {
             userTableAccessInfoService.insertValue(cust);
         }
-        return "redirect:/tableView";
+        return "redirect:/getSpecificTable?tableName=Customers";
     }
 
     @RequestMapping(value = "/createNewClass/TableClassLevel", method = RequestMethod.POST)
     public String createNewEntity(@ModelAttribute TableClassLevel tableClassLevel, Principal principal) {
         if (tableInfoService.isWritable(principal.getName(), "TableClassLevels"))
             userTableAccessInfoService.insertValue(tableClassLevel);
-        return "redirect:/tableView";
+        return "redirect:/getSpecificTable?tableName=TableClassLevels";
     }
 
     @RequestMapping(value = "/createNewClass/Employee", method = RequestMethod.POST)
     public String createNewEntity(@ModelAttribute Employee employee, Principal principal) {
         if (tableInfoService.isWritable(principal.getName(), "Employees"))
             userTableAccessInfoService.insertValue(employee);
-        return "redirect:/tableView";
+        return "redirect:/getSpecificTable?tableName=Employees";
     }
 
     @RequestMapping(value = "/createNewClass/Rental", method = RequestMethod.POST)
@@ -67,7 +67,7 @@ public class EntityCreateController {
                 userTableAccessInfoService.insertValue(rental);
             }
         }
-        return "redirect:/tableView";
+        return "redirect:/getSpecificTable?tableName=Rentals";
     }
 
     @RequestMapping(value = "/createNewClass/ShopTransaction", method = RequestMethod.POST)
@@ -85,14 +85,14 @@ public class EntityCreateController {
                 userTableAccessInfoService.insertValue(transaction);
             }
         }
-        return "redirect:/tableView";
+        return "redirect:/getSpecificTable?tableName=ShopTransactions";
     }
 
     @RequestMapping(value = "/createNewClass/Video", method = RequestMethod.POST)
     public String createNewEntity(@ModelAttribute Video object, Principal principal) {
         if (tableInfoService.isWritable(principal.getName(), "Videos"))
             userTableAccessInfoService.insertValue(object);
-        return "redirect:/tableView";
+        return "redirect:/getSpecificTable?tableName=Videos";
     }
 
     @RequestMapping(value = "/createNewClass/User", method = RequestMethod.POST)
@@ -101,6 +101,6 @@ public class EntityCreateController {
                 && (tableInfoService.isWritable(principal.getName(), "Users"))) {
             registerService.registerUser(user);
         }
-        return "redirect:/tableView";
+        return "redirect:/getSpecificTable?tableName=Users";
     }
 }
