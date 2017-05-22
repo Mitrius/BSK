@@ -27,7 +27,7 @@ public class Employee implements Serializable, EntityBSKClass {
     private String position;
 
     public String getHeader() {
-        return "id,name,surname,position";
+        return "id;name;surname;position";
     }
 
     @Override
@@ -36,7 +36,7 @@ public class Employee implements Serializable, EntityBSKClass {
     }
 
     public String toString() {
-        return id + "," + name + "," + surname + "," + position;
+        return id + ";" + name + ";" + surname + ";" + position;
     }
 
 }

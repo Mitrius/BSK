@@ -29,8 +29,8 @@ public class EntityEditController {
         String entity = userTableAccessInfoService.getEntry(type, id).toString();
 
         modelAndView.getModelMap().addAttribute("type", type);
-        modelAndView.getModelMap().addAttribute("entityHeader", entityHeader.split(","));
-        modelAndView.getModelMap().addAttribute("entity", entity.split(","));
+        modelAndView.getModelMap().addAttribute("entityHeader", entityHeader.split(";"));
+        modelAndView.getModelMap().addAttribute("entity", entity.split(";"));
 
 
         return modelAndView;

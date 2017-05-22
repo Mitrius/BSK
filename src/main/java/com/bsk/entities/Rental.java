@@ -34,7 +34,7 @@ public class Rental implements Serializable, EntityBSKClass {
     private Video video;
 
     public String getHeader() {
-        return "id,cost,rentalDate,tillDate,transactionID,videoID";
+        return "id;cost;rentalDate;tillDate;transactionID;videoID";
     }
 
     @Override
@@ -43,6 +43,7 @@ public class Rental implements Serializable, EntityBSKClass {
     }
 
     public String toString() {
-        return id + "," + cost + "," + rentalDate.toString() + "," + tillDate.toString() + "," + transaction.getId() + "," + video.getId();
+        return id + ";" + cost + ";" + rentalDate.toString() + ";" + tillDate.toString()
+                + ";" + transaction.getId() + ";" + video.getId();
     }
 }

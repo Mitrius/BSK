@@ -26,7 +26,7 @@ public class Video implements Serializable, EntityBSKClass {
     private String status;
 
     public String getHeader() {
-        return "id,title,price,status";
+        return "id;title;price;status";
     }
 
     @Override
@@ -35,7 +35,7 @@ public class Video implements Serializable, EntityBSKClass {
     }
 
     public String toString() {
-        return id + "," + title + "," + price.toString() + "," + status;
+        return id + ";" + title + ";" + price.toString() + ";" + status;
     }
 
 }

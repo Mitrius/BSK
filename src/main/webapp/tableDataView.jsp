@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+﻿<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -70,7 +70,7 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <c:forTokens items="${entityHeader}" delims="," var="headerCell">
+                    <c:forTokens items="${entityHeader}" delims=";" var="headerCell">
                         <th>
                             <c:out value="${headerCell}"/>
                         </th>
@@ -79,30 +79,39 @@
                 </thead>
                 <tbody>
                 <c:forEach var="tableRow" items="${table}">
-                    <form id="delete${tableRow.split(",")[0]}" action="<c:url value="/delete"/>" method="post"></form>
-                    <form id="edit${tableRow.split(",")[0]}" action="<c:url value="/editEntity"/>" method="post"></form>
+                    <form id="delete${tableRow.split(";")[0]}" action="<c:url value="/delete"/>" method="post"></form>
+                    <form id="edit${tableRow.split(";")[0]}" action="<c:url value="/editEntity"/>" method="post"></form>
                     <tr>
-                        <c:forTokens var="tableCell" items="${tableRow}" delims=",">
+                        <c:forTokens var="tableCell" items="${tableRow}" delims=";">
                             <td>
                                 <c:out value="${tableCell}"/>
                             </td>
                         </c:forTokens>
                         <td>
-                            <input form="edit${tableRow.split(",")[0]}" type="hidden" name="id" value="${tableRow.split(",")[0]}"/>
-                            <input form="edit${tableRow.split(",")[0]}" type="hidden" name="type" value="${type}"/>
-                            <input form="edit${tableRow.split(",")[0]}" type="hidden" name="entityHeader" value="${entityHeader}"/>
-                            <input form="edit${tableRow.split(",")[0]}" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                            <button class="btn btn-default" form="edit${tableRow.split(",")[0]}" type="submit">Edit</button>
-                            <input form="delete${tableRow.split(",")[0]}" type="hidden" name="key" value="${tableRow.split(",")[0]}"/>
-                            <input form="delete${tableRow.split(",")[0]}" type="hidden" name="tableName" value="${type}"/>
-                            <input form="delete${tableRow.split(",")[0]}" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                            <button class="btn btn-default" form="delete${tableRow.split(",")[0]}" type="submit">Delete</button>
+                            <input form="edit${tableRow.split(";")[0]}" type="hidden" name="id"
+                                   value="${tableRow.split(";")[0]}"/>
+                            <input form="edit${tableRow.split(";")[0]}" type="hidden" name="type" value="${type}"/>
+                            <input form="edit${tableRow.split(";")[0]}" type="hidden" name="entityHeader"
+                                   value="${entityHeader}"/>
+                            <input form="edit${tableRow.split(";")[0]}" type="hidden" name="${_csrf.parameterName}"
+                                   value="${_csrf.token}"/>
+                            <button class="btn btn-default" form="edit${tableRow.split(";")[0]}" type="submit">Edit
+                            </button>
+                            <input form="delete${tableRow.split(";")[0]}" type="hidden" name="key"
+                                   value="${tableRow.split(";")[0]}"/>
+                            <input form="delete${tableRow.split(";")[0]}" type="hidden" name="tableName"
+                                   value="${type}"/>
+                            <input form="delete${tableRow.split(";")[0]}" type="hidden" name="${_csrf.parameterName}"
+                                   value="${_csrf.token}"/>
+                            <button class="btn btn-default" form="delete${tableRow.split(";")[0]}" type="submit">
+                                Delete
+                            </button>
                         </td>
                     </tr>
                 </c:forEach>
                 <form id="create" action="/createNewClass/${type}" method="post">
                     <tr>
-                        <c:forTokens items="${entityHeader}" delims="," var="headerCell">
+                        <c:forTokens items="${entityHeader}" delims=";" var="headerCell">
                             <td>
                                 <c:if test="${headerCell ne 'id'}">
                                     <input type="text" name="${headerCell}" value=""/>
@@ -125,7 +134,7 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <c:forTokens items="${entityHeader}" delims="," var="headerCell">
+                                <c:forTokens items="${entityHeader}" delims=";" var="headerCell">
                                     <td>
                                         <c:out value="${headerCell}"/>
                                     </td>
@@ -134,7 +143,7 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <c:forTokens items="${entityHeader}" delims="," var="headerCell">
+                                <c:forTokens items="${entityHeader}" delims=";" var="headerCell">
                                     <td>
                                         <c:if test="${headerCell ne 'id'}">
                                             <input type="text" name="${headerCell}" value=""/>

@@ -28,7 +28,7 @@ public class ShopTransaction implements Serializable, EntityBSKClass {
     private Customer customer;
 
     public String getHeader() {
-        return "id,employee,customer";
+        return "id;employee;customer";
     }
     @Override
     public Serializable getKey() {
@@ -36,6 +36,6 @@ public class ShopTransaction implements Serializable, EntityBSKClass {
     }
 
     public String toString() {
-        return id + "," + employee.getId() + "," + customer.getId();
+        return id + ";" + employee.getId() + ";" + customer.getId();
     }
 }

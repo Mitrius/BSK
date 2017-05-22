@@ -28,4 +28,5 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/static/**").addResourceLocations("/static/");
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
+
 }

@@ -25,7 +25,7 @@ public class TableClassLevel implements Serializable, EntityBSKClass {
     Integer classLevel;
 
     public String getHeader() {
-        return "tableName,classLevel";
+        return "tableName;classLevel";
     }
 
     @Override
@@ -34,6 +34,6 @@ public class TableClassLevel implements Serializable, EntityBSKClass {
     }
 
     public String toString() {
-        return tableName + "," + classLevel;
+        return tableName + ";" + classLevel;
     }
 }

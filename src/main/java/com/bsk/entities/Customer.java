@@ -26,9 +26,9 @@ public class Customer implements Serializable, EntityBSKClass {
     }
 
     public String getHeader() {
-        return "id,name,surname";
+        return "id;name;surname";
     }
     public String toString() {
-        return id + "," + name + "," + surname;
+        return id + ";" + name + ";" + surname;
     }
 }
