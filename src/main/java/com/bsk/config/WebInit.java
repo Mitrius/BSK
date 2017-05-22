@@ -3,8 +3,6 @@ package com.bsk.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.Filter;
-
 /**
  * Created by Mitrius on 12.03.17.
  */
@@ -23,8 +21,4 @@ public class WebInit extends AbstractAnnotationConfigDispatcherServletInitialize
         return new String[]{"/"};
     }
 
-    @Override
-    protected Filter[] getServletFilters() {
-        return new Filter[]{new bskEncodingFilter()};
-    }
 }
