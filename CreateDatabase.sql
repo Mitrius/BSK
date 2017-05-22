@@ -1,26 +1,40 @@
 CREATE TABLE `Customers` (
   `id`      INTEGER PRIMARY KEY AUTO_INCREMENT,
-  `name`    VARCHAR(255) NOT NULL,
-  `surname` VARCHAR(255) NOT NULL
-);
+  `name`    NCHAR(255)
+            COLLATE utf8_polish_ci NOT NULL,
+  `surname` NCHAR(255)
+            COLLATE utf8_polish_ci NOT NULL
+)
+  CHARACTER SET utf8
+  COLLATE utf8_polish_ci;
 
 CREATE TABLE `Employees` (
   `id`       INTEGER PRIMARY KEY AUTO_INCREMENT,
-  `name`     VARCHAR(255) NOT NULL,
-  `surname`  VARCHAR(255) NOT NULL,
-  `position` VARCHAR(255) NOT NULL
-);
+  `name`     NCHAR(255)
+             COLLATE utf8_polish_ci NOT NULL,
+  `surname`  NCHAR(255)
+             COLLATE utf8_polish_ci NOT NULL,
+  `position` NCHAR(255)
+             COLLATE utf8_polish_ci
+)
+  CHARACTER SET utf8
+  COLLATE utf8_polish_ci;
 
 CREATE TABLE `TableClassLevels` (
-  `tablename`  VARCHAR(255) PRIMARY KEY,
+  `tablename`  NCHAR(255)
+               COLLATE utf8_polish_ci PRIMARY KEY,
   `classlevel` INTEGER NOT NULL
-);
+)
+  CHARACTER SET utf8
+  COLLATE utf8_polish_ci;
 
 CREATE TABLE `Transactions` (
   `id`       INTEGER PRIMARY KEY AUTO_INCREMENT,
   `employee` INTEGER NOT NULL,
   `customer` INTEGER NOT NULL
-);
+)
+  CHARACTER SET utf8
+  COLLATE utf8_polish_ci;
 
 CREATE INDEX `idx_transactions__customer`
   ON `Transactions` (`customer`);
@@ -35,19 +49,28 @@ ALTER TABLE `Transactions`
   ADD CONSTRAINT `fk_transactions__employee` FOREIGN KEY (`employee`) REFERENCES `Employees` (`id`);
 
 CREATE TABLE `Users` (
-  `username`       VARCHAR(255) PRIMARY KEY,
-  `password`       VARCHAR(255) NOT NULL,
-  `clearancelevel` INTEGER      NOT NULL,
-  `role`           VARCHAR(255) NOT NULL,
-  `enabled`        INTEGER      NOT NULL
-);
+  `username`       NCHAR(255)
+                   COLLATE utf8_polish_ci PRIMARY KEY,
+  `password`       NCHAR(255)
+                   COLLATE utf8_polish_ci NOT NULL,
+  `clearancelevel` INTEGER                NOT NULL,
+  `role`           NCHAR(255)
+                   COLLATE utf8_polish_ci NOT NULL,
+  `enabled`        INTEGER                NOT NULL
+)
+  CHARACTER SET utf8
+  COLLATE utf8_polish_ci;
 
 CREATE TABLE `Videos` (
   `id`     INTEGER PRIMARY KEY AUTO_INCREMENT,
-  `title`  VARCHAR(255)   NOT NULL,
-  `price`  DECIMAL(12, 2) NOT NULL,
-  `status` VARCHAR(255)   NOT NULL
-);
+  `title`  NCHAR(255)
+           COLLATE utf8_polish_ci NOT NULL,
+  `price`  DECIMAL(12, 2)         NOT NULL,
+  `status` NCHAR(255)
+           COLLATE utf8_polish_ci NOT NULL
+)
+  CHARACTER SET utf8
+  COLLATE utf8_polish_ci;
 
 CREATE TABLE `Rentals` (
   `video`       INTEGER        NOT NULL,
@@ -56,7 +79,9 @@ CREATE TABLE `Rentals` (
   `tilldate`    DATE           NOT NULL,
   `rentaldate`  DATE           NOT NULL,
   `id`          INTEGER PRIMARY KEY AUTO_INCREMENT
-);
+)
+  CHARACTER SET utf8
+  COLLATE utf8_polish_ci;
 
 CREATE INDEX `idx_rentals__transaction`
   ON `Rentals` (`transaction`);

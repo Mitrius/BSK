@@ -80,7 +80,7 @@ public class EntityEditController {
     public String editEntity(@ModelAttribute User user,
                              @RequestParam(value = "key") String key, Principal principal) {
         if ((user.getClearanceLevel() <= 3) && (user.getClearanceLevel() >= 0) &&
-                (tableInfoService.isWritable(principal.getName(), "Customers"))) {
+                (tableInfoService.isWritable(principal.getName(), "Users"))) {
             userTableAccessInfoService.editUser(user, key);
         }
         return "redirect:/tableView";

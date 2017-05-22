@@ -13,6 +13,7 @@ class bskEncodingFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         httpServletResponse.setCharacterEncoding("UTF-8");
         httpServletRequest.setCharacterEncoding("UTF-8");
+        httpServletResponse.setContentType("text/html; charset=UTF-8");
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 }
