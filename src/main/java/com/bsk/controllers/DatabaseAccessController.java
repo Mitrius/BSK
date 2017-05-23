@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -25,11 +26,12 @@ public class DatabaseAccessController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String deleteEntity(@RequestParam(value = "key") String key,
-                               @RequestParam(value = "tableName") String tableName, Principal principal) {
-        if (tableInfoService.isWritable(principal.getName(), tableName + "s")){
-            userTableAccessInfoService.deleteEntity(key, tableName);
+                               @RequestParam(value = "tableName") String type, Principal principal) {
+        if (tableInfoService.isWritable(principal.getName(), type + "s")) {
+            if (!(Objects.equals(type, "User") && Objects.equals(key, principal.getName())))
+                userTableAccessInfoService.deleteEntity(key, type);
         }
-        return "redirect:/getSpecificTable?tableName=" + tableName + "s";
+        return "redirect:/getSpecificTable?tableName=" + type + "s";
     }
     @RequestMapping(value = "/getSpecificTable", method = RequestMethod.GET)
     public ModelAndView getSpecificTable(@RequestParam String tableName, Principal principal) throws ReflectiveOperationException {
