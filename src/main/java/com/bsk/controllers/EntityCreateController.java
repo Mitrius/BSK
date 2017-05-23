@@ -95,6 +95,10 @@ public class EntityCreateController {
         return "redirect:/getSpecificTable?tableName=Videos";
     }
 
+    @RequestMapping(value = "/createUser", method = RequestMethod.GET)
+    public String registerUser() {
+        return "/registerView";
+    }
     @RequestMapping(value = "/createNewClass/User", method = RequestMethod.POST)
     public String createNewEntity(@ModelAttribute User user, Principal principal) {
         if ((user.getClearanceLevel() <= 3) && (user.getClearanceLevel() >= 0)

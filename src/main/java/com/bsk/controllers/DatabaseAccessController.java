@@ -31,7 +31,6 @@ public class DatabaseAccessController {
         }
         return "redirect:/getSpecificTable?tableName=" + tableName + "s";
     }
-
     @RequestMapping(value = "/getSpecificTable", method = RequestMethod.GET)
     public ModelAndView getSpecificTable(@RequestParam String tableName, Principal principal) throws ReflectiveOperationException {
         String className = tableName.substring(0, tableName.length() - 1);
@@ -57,6 +56,7 @@ public class DatabaseAccessController {
 
         return modelAndView;
     }
+
 
     @RequestMapping(value = {"/getTableNames", "/tableView"}, method = RequestMethod.GET)
     public ModelAndView getTableNames() {

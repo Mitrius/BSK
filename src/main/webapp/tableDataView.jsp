@@ -118,17 +118,33 @@
                         </td>
                     </tr>
                 </c:forEach>
-                <form id="create" action="/createNewClass/${type}" method="post">
-                    <tr>
-                        <c:forTokens items="${entityHeader}" delims=";" var="headerCell">
+                <c:choose>
+                    <c:when test="${type != 'User'}">
+                        <form id="create" action="/createNewClass/${type}" method="post"></form>
+                        <tr>
+                            <c:forTokens items="${entityHeader}" delims=";" var="headerCell">
+                                <td>
+                                    <c:if test="${headerCell ne 'id'}">
+                                        <input form="create" type="text" name="${headerCell}" value=""/>
+                                    </c:if>
+                                </td>
+                            </c:forTokens>
                             <td>
-                                <c:if test="${headerCell ne 'id'}">
-                                    <input type="text" name="${headerCell}" value=""/>
-                                </c:if>
+                                <input form="create" type="hidden" name="${_csrf.parameterName}"
+                                       value="${_csrf.token}"/>
+                                <c:choose>
+                                    <c:when test="${editPerm}">
+                                        <button form="create" class="btn btn-default" type="submit">Add</button>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button class="btn btn-default disabled" type="button">Add</button>
+                                    </c:otherwise>
+                                </c:choose>
                             </td>
-                        </c:forTokens>
-                        <td>
-                            <input form="create" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </tr>
+                    </c:when>
+                    <c:otherwise>
+                        <form id="create" action="/createUser" method="post">
                             <c:choose>
                                 <c:when test="${editPerm}">
                                     <button form="create" class="btn btn-default" type="submit">Add</button>
@@ -137,9 +153,9 @@
                                     <button class="btn btn-default disabled" type="button">Add</button>
                                 </c:otherwise>
                             </c:choose>
-                        </td>
-                    </tr>
-                </form>
+                        </form>
+                    </c:otherwise>
+                </c:choose>
                 </tbody>
             </table>
         </c:when>

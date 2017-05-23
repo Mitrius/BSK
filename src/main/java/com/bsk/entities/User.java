@@ -30,7 +30,7 @@ public class User implements Serializable, EntityBSKClass {
     Integer clearanceLevel;
 
     public String getHeader() {
-        return "username;password;role;enabled;clearanceLevel";
+        return "username;enabled;clearanceLevel";
     }
 
     @Override
@@ -39,7 +39,7 @@ public class User implements Serializable, EntityBSKClass {
     }
 
     public String toString() {
-        return username + ";" + password + ";" + role + ";" + enabled + ";" + clearanceLevel;
+        return username + ";" + enabled + ";" + clearanceLevel;
     }
 
 }

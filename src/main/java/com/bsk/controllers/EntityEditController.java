@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Mitrius on 17.04.17.
@@ -27,11 +31,14 @@ public class EntityEditController {
     public ModelAndView editEntity(@RequestParam String type, @RequestParam String id, @RequestParam String entityHeader) {
         ModelAndView modelAndView = new ModelAndView("editView");
         String entity = userTableAccessInfoService.getEntry(type, id).toString();
-
+        List<String> entityList = new ArrayList<>(Arrays.asList(entity.split(";")));
+        if (Objects.equals(type, "User")) {
+            entityHeader = "username;password;enabled;clearanceLevel";
+            entityList.add(1, "");
+        }
         modelAndView.getModelMap().addAttribute("type", type);
         modelAndView.getModelMap().addAttribute("entityHeader", entityHeader.split(";"));
-        modelAndView.getModelMap().addAttribute("entity", entity.split(";"));
-
+        modelAndView.getModelMap().addAttribute("entity", entityList);
 
         return modelAndView;
     }
@@ -81,6 +88,7 @@ public class EntityEditController {
                              @RequestParam(value = "key") String key, Principal principal) {
         if ((user.getClearanceLevel() <= 3) && (user.getClearanceLevel() >= 0) &&
                 (tableInfoService.isWritable(principal.getName(), "Users"))) {
+            user.setRole("USER");
             userTableAccessInfoService.editUser(user, key);
         }
         return "redirect:/getSpecificTable?tableName=Users";
