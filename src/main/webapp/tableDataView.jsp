@@ -144,7 +144,7 @@
                         </tr>
                     </c:when>
                     <c:otherwise>
-                        <form id="create" action="<c:url value="/createUser"/>" method="post"></form>
+                        <form id="create" action="<c:url value="/createUser"/>"></form>
                             <c:choose>
                                 <c:when test="${editPerm}">
                                     <button form="create" class="btn btn-default" type="submit">Add</button>
