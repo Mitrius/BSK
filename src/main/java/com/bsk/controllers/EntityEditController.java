@@ -4,6 +4,7 @@ import com.bsk.entities.*;
 import com.bsk.services.TableInfoService;
 import com.bsk.services.UserTableAccessInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,10 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Created by Mitrius on 17.04.17.
@@ -58,9 +56,25 @@ public class EntityEditController {
     }
 
     @RequestMapping(value = "/editEntity/Rental", method = RequestMethod.POST)
-    public String editEntity(@ModelAttribute Rental rental,
+    public String editEntity(@RequestParam(name = "cost") Double cost,
+                             @RequestParam(name = "rentalDate") @DateTimeFormat(pattern = "yy-MM-dd") Date rentalDate,
+                             @RequestParam(name = "tillDate") @DateTimeFormat(pattern = "yy-MM-dd") Date tillDate,
+                             @RequestParam(name = "transactionID") Integer transactId,
+                             @RequestParam(name = "videoID") Integer videoID,
                              @RequestParam(value = "key") String key) {
-        userTableAccessInfoService.edit(rental, key);
+
+        Video video = (Video) userTableAccessInfoService.getEntry("Video", String.valueOf(videoID));
+        ShopTransaction transaction = (ShopTransaction) userTableAccessInfoService.getEntry("ShopTransaction", String.valueOf(transactId));
+        if (video != null && transaction != null) {
+            Rental rental = new Rental();
+            rental.setCost(cost);
+            rental.setId(null);
+            rental.setRentalDate(new java.sql.Date(rentalDate.getTime()));
+            rental.setTillDate(new java.sql.Date(tillDate.getTime()));
+            rental.setVideo(video);
+            rental.setTransaction(transaction);
+            userTableAccessInfoService.edit(rental, key);
+        }
         return "redirect:/getSpecificTable?tableName=Rentals";
     }
 

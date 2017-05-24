@@ -43,8 +43,8 @@ public class EntityCreateController {
 
     @RequestMapping(value = "/createNewClass/Rental", method = RequestMethod.POST)
     public String createNewEntity(@RequestParam(name = "cost") Double cost,
-                                  @RequestParam(name = "rentalDate") @DateTimeFormat(pattern = "dd.MM.yy") Date rentalDate,
-                                  @RequestParam(name = "tillDate") @DateTimeFormat(pattern = "dd.MM.yy") Date tillDate,
+                                  @RequestParam(name = "rentalDate") @DateTimeFormat(pattern = "yy-MM-dd") Date rentalDate,
+                                  @RequestParam(name = "tillDate") @DateTimeFormat(pattern = "yy-MM-dd") Date tillDate,
                                   @RequestParam(name = "transactionID") Integer transactId,
                                   @RequestParam(name = "videoID") Integer videoID) {
             Video video = (Video) userTableAccessInfoService.getEntry("Video", String.valueOf(videoID));
