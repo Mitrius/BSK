@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.security.Principal;
 import java.util.Date;
 
 @Controller
@@ -25,24 +24,20 @@ public class EntityCreateController {
     private TableInfoService tableInfoService;
 
     @RequestMapping(value = "/createNewClass/Customer", method = RequestMethod.POST)
-    public String createNewEntity(@ModelAttribute Customer cust, Principal principal) {
-        if (tableInfoService.isWritable(principal.getName(), "Customers")) {
+    public String createNewEntity(@ModelAttribute Customer cust) {
             userTableAccessInfoService.insertValue(cust);
-        }
         return "redirect:/getSpecificTable?tableName=Customers";
     }
 
     @RequestMapping(value = "/createNewClass/TableClassLevel", method = RequestMethod.POST)
-    public String createNewEntity(@ModelAttribute TableClassLevel tableClassLevel, Principal principal) {
-        if (tableInfoService.isWritable(principal.getName(), "TableClassLevels"))
-            userTableAccessInfoService.insertValue(tableClassLevel);
+    public String createNewEntity(@ModelAttribute TableClassLevel tableClassLevel) {
+        userTableAccessInfoService.insertValue(tableClassLevel);
         return "redirect:/getSpecificTable?tableName=TableClassLevels";
     }
 
     @RequestMapping(value = "/createNewClass/Employee", method = RequestMethod.POST)
-    public String createNewEntity(@ModelAttribute Employee employee, Principal principal) {
-        if (tableInfoService.isWritable(principal.getName(), "Employees"))
-            userTableAccessInfoService.insertValue(employee);
+    public String createNewEntity(@ModelAttribute Employee employee) {
+        userTableAccessInfoService.insertValue(employee);
         return "redirect:/getSpecificTable?tableName=Employees";
     }
 
@@ -51,8 +46,7 @@ public class EntityCreateController {
                                   @RequestParam(name = "rentalDate") @DateTimeFormat(pattern = "dd.MM.yy") Date rentalDate,
                                   @RequestParam(name = "tillDate") @DateTimeFormat(pattern = "dd.MM.yy") Date tillDate,
                                   @RequestParam(name = "transactionID") Integer transactId,
-                                  @RequestParam(name = "videoID") Integer videoID, Principal principal) {
-        if (tableInfoService.isWritable(principal.getName(), "Videos")) {
+                                  @RequestParam(name = "videoID") Integer videoID) {
             Video video = (Video) userTableAccessInfoService.getEntry("Video", String.valueOf(videoID));
             ShopTransaction transaction = (ShopTransaction) userTableAccessInfoService.getEntry("ShopTransaction", String.valueOf(transactId));
             if (video != null && transaction != null) {
@@ -66,14 +60,12 @@ public class EntityCreateController {
 
                 userTableAccessInfoService.insertValue(rental);
             }
-        }
         return "redirect:/getSpecificTable?tableName=Rentals";
     }
 
     @RequestMapping(value = "/createNewClass/ShopTransaction", method = RequestMethod.POST)
     public String createNewEntity(@RequestParam(name = "employee") Integer employee,
-                                  @RequestParam(name = "customer") Integer customer, Principal principal) {
-        if (tableInfoService.isWritable(principal.getName(), "ShopTransactions")) {
+                                  @RequestParam(name = "customer") Integer customer) {
             ShopTransaction transaction = new ShopTransaction();
             Employee employee1 = (Employee) userTableAccessInfoService.getEntry("Employee", String.valueOf(employee));
             Customer customer1 = (Customer) userTableAccessInfoService.getEntry("Customer", String.valueOf(customer));
@@ -81,30 +73,24 @@ public class EntityCreateController {
                 transaction.setId(null);
                 transaction.setCustomer(customer1);
                 transaction.setEmployee(employee1);
-
                 userTableAccessInfoService.insertValue(transaction);
             }
-        }
         return "redirect:/getSpecificTable?tableName=ShopTransactions";
     }
 
     @RequestMapping(value = "/createNewClass/Video", method = RequestMethod.POST)
-    public String createNewEntity(@ModelAttribute Video object, Principal principal) {
-        if (tableInfoService.isWritable(principal.getName(), "Videos"))
-            userTableAccessInfoService.insertValue(object);
+    public String createNewEntity(@ModelAttribute Video object) {
+        userTableAccessInfoService.insertValue(object);
         return "redirect:/getSpecificTable?tableName=Videos";
     }
 
-    @RequestMapping(value = "/createUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/createUser")
     public String registerUser() {
         return "/registerView";
     }
     @RequestMapping(value = "/createNewClass/User", method = RequestMethod.POST)
-    public String createNewEntity(@ModelAttribute User user, Principal principal) {
-        if ((user.getClearanceLevel() <= 3) && (user.getClearanceLevel() >= 0)
-                && (tableInfoService.isWritable(principal.getName(), "Users"))) {
-            registerService.registerUser(user);
-        }
+    public String createNewEntity(@ModelAttribute User user) {
+        registerService.registerUser(user);
         return "redirect:/getSpecificTable?tableName=Users";
     }
 }

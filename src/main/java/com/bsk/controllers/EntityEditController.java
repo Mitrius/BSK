@@ -45,41 +45,36 @@ public class EntityEditController {
 
     @RequestMapping(value = "/editEntity/Customer", method = RequestMethod.POST)
     public String editEntity(@ModelAttribute Customer customer,
-                             @RequestParam(value = "key") String key, Principal principal) {
-        if (tableInfoService.isWritable(principal.getName(), "Customers"))
-            userTableAccessInfoService.editCustomer(customer, key);
+                             @RequestParam(value = "key") String key) {
+        userTableAccessInfoService.edit(customer, key);
         return "redirect:/getSpecificTable?tableName=Customers";
     }
 
     @RequestMapping(value = "/editEntity/Employee", method = RequestMethod.POST)
     public String editEntity(@ModelAttribute Employee employee,
-                             @RequestParam(value = "key") String key, Principal principal) {
-        if (tableInfoService.isWritable(principal.getName(), "Employees"))
-            userTableAccessInfoService.editEmployee(employee, key);
+                             @RequestParam(value = "key") String key) {
+        userTableAccessInfoService.edit(employee, key);
         return "redirect:/getSpecificTable?tableName=Employees";
     }
 
     @RequestMapping(value = "/editEntity/Rental", method = RequestMethod.POST)
     public String editEntity(@ModelAttribute Rental rental,
-                             @RequestParam(value = "key") String key, Principal principal) {
-        if (tableInfoService.isWritable(principal.getName(), "Rentals"))
-            userTableAccessInfoService.editRental(rental, key);
+                             @RequestParam(value = "key") String key) {
+        userTableAccessInfoService.edit(rental, key);
         return "redirect:/getSpecificTable?tableName=Rentals";
     }
 
     @RequestMapping(value = "/editEntity/ShopTransaction", method = RequestMethod.POST)
     public String editEntity(@ModelAttribute ShopTransaction st,
-                             @RequestParam(value = "key") String key, Principal principal) {
-        if (tableInfoService.isWritable(principal.getName(), "ShopTransactions"))
-            userTableAccessInfoService.editShopTransaction(st, key);
+                             @RequestParam(value = "key") String key) {
+        userTableAccessInfoService.edit(st, key);
         return "redirect:/getSpecificTable?tableName=ShopTransactions";
     }
 
     @RequestMapping(value = "/editEntity/TableClassLevel", method = RequestMethod.POST)
     public String editEntity(@ModelAttribute TableClassLevel tcl,
-                             @RequestParam(value = "key") String key, Principal principal) {
-        if (tableInfoService.isWritable(principal.getName(), "TableClassLevels"))
-            userTableAccessInfoService.editTableClassLevel(tcl, key);
+                             @RequestParam(value = "key") String key) {
+        userTableAccessInfoService.edit(tcl, key);
         return "redirect:/getSpecificTable?tableName=TableClassLevels";
     }
 
@@ -89,16 +84,15 @@ public class EntityEditController {
         if ((user.getClearanceLevel() <= 3) && (user.getClearanceLevel() >= 0) &&
                 (tableInfoService.isWritable(principal.getName(), "Users"))) {
             user.setRole("USER");
-            userTableAccessInfoService.editUser(user, key);
+            userTableAccessInfoService.edit(user, key);
         }
         return "redirect:/getSpecificTable?tableName=Users";
     }
 
     @RequestMapping(value = "/editEntity/Video", method = RequestMethod.POST)
     public String editEntity(@ModelAttribute Video video,
-                             @RequestParam(value = "key") String key, Principal principal) {
-        if (tableInfoService.isWritable(principal.getName(), "Videos"))
-            userTableAccessInfoService.editVideo(video, key);
+                             @RequestParam(value = "key") String key) {
+        userTableAccessInfoService.edit(video, key);
         return "redirect:/getSpecificTable?tableName=Videos";
     }
 }
