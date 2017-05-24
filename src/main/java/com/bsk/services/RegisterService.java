@@ -19,7 +19,9 @@ public class RegisterService {
         String hash = pe.encode(user.getPassword());
         user.setPassword(hash);
         user.setRole("USER"); //Wykluczamy tworzenie adminów (role narzuca Spring Security)
-        userDao.save(user);
+        if(userDao.findByID(user.getUsername()) == null) {
+            userDao.save(user);
+        }
     }
 
 }
