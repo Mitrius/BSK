@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Created by Mitrius on 14.03.17.
@@ -25,6 +26,9 @@ public class Employee implements Serializable, EntityBSKClass {
     private String surname;
     @Column(name = "position")
     private String position;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
+    private Set<ShopTransaction> transactionSet;
 
     public String getHeader() {
         return "id;name;surname;position";

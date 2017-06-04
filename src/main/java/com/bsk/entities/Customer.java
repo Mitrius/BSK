@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -20,6 +21,9 @@ public class Customer implements Serializable, EntityBSKClass {
     private String name;
     @Column(name = "surname")
     private String surname;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE)
+    private Set<ShopTransaction> transactionSet;
 
     public Integer getKey() {
         return id;

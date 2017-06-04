@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Created by Mitrius on 14.03.17.
@@ -25,9 +26,13 @@ public class Video implements Serializable, EntityBSKClass {
     @Column(name = "status")
     private String status;
 
+    @OneToMany(mappedBy = "video", cascade = CascadeType.REMOVE)
+    private Set<Rental> rentals;
+
     public String getHeader() {
         return "id;title;price;status";
     }
+
 
     @Override
     public Serializable getKey() {

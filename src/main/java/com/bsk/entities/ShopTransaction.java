@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Created by Mitrius on 02.04.17.
@@ -26,6 +27,9 @@ public class ShopTransaction implements Serializable, EntityBSKClass {
     @ManyToOne
     @JoinColumn(name = "customer")
     private Customer customer;
+
+    @OneToMany(mappedBy = "transaction", cascade = CascadeType.REMOVE)
+    private Set<Rental> rentalSet;
 
     public String getHeader() {
         return "id;employee;customer";

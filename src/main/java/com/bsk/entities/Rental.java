@@ -2,6 +2,8 @@ package com.bsk.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,8 +30,10 @@ public class Rental implements Serializable, EntityBSKClass {
 
     @ManyToOne
     @JoinColumn(name = "transaction")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private ShopTransaction transaction;
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "video")
     private Video video;
 

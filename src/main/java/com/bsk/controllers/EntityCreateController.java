@@ -2,7 +2,6 @@ package com.bsk.controllers;
 
 import com.bsk.entities.*;
 import com.bsk.services.RegisterService;
-import com.bsk.services.TableInfoService;
 import com.bsk.services.UserTableAccessInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,8 +19,6 @@ public class EntityCreateController {
     private UserTableAccessInfoService userTableAccessInfoService;
     @Autowired
     private RegisterService registerService;
-    @Autowired
-    private TableInfoService tableInfoService;
 
     @RequestMapping(value = "/createNewClass/Customer", method = RequestMethod.POST)
     public String createNewEntity(@ModelAttribute Customer cust) {

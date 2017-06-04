@@ -62,13 +62,7 @@
             </div>
             <div class="form-group">
                 <label><input id="checkbox1" type="checkbox" name="enabled" class="form-control"aria-describedby="sizing-addon1">Approved</label>
-                <label><input list="levels" name="clearanceLevel"><br>Clearance level</label>
-                <datalist id="levels">
-                    <option value="0">Public</option>
-                    <option value="1">Confidential</option>
-                    <option value="2">Secret</option>
-                    <option value="3">Top secret</option>
-                </datalist>
+                <label><input type="text" name="clearanceLevel"><br>Clearance level</label>
             </div>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <div class="form-group">

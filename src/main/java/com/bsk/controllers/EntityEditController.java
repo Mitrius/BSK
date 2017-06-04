@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.security.Principal;
 import java.util.*;
 
 /**
@@ -94,9 +93,8 @@ public class EntityEditController {
 
     @RequestMapping(value = "/editEntity/User", method = RequestMethod.POST)
     public String editEntity(@ModelAttribute User user,
-                             @RequestParam(value = "key") String key, Principal principal) {
-        if ((user.getClearanceLevel() <= 3) && (user.getClearanceLevel() >= 0) &&
-                (tableInfoService.isWritable(principal.getName(), "Users"))) {
+                             @RequestParam(value = "key") String key) {
+        if (user.getClearanceLevel() >= 0) {
             user.setRole("USER");
             userTableAccessInfoService.edit(user, key);
         }
